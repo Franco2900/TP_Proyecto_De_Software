@@ -1,0 +1,19 @@
+.espaciador{
+	padding: 50px;
+}
+
+.footerInferior{
+    width: 100%;
+    height: 81px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    background-color: grey;
+    text-align: center;
+    padding: 15px;
+    color: white;
+}
+
+.botonBuscar{
+	background-color: blue;
+}
