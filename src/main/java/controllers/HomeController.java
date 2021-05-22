@@ -8,10 +8,10 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 @RequestMapping("/")
 public class HomeController {
-	
-	@GetMapping("home") 
-	public ModelAndView home() { //Metodo que se ejecuta cuando se pone /home
-		return new ModelAndView("index");
+
+	@GetMapping("") 
+	public ModelAndView home() {
+		return new ModelAndView ("index");
 	}
 	
 }
