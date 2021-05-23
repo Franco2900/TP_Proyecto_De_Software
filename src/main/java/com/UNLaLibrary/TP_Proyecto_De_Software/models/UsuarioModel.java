@@ -1,25 +1,16 @@
-package entities;
+package com.UNLaLibrary.TP_Proyecto_De_Software.models;
 
-import javax.persistence.*;
+public class UsuarioModel {
 
-@Entity
-@Table (name = "usuario")
-public class Usuario {
-	
 	//Atributos
-	@Id
-	@GeneratedValue
-	@Column (name = "id")
 	private long id;
-	
-	@Column (name = "nombre")
 	private String nombre;
 	
 	
 	//Constructores
-	public Usuario() {};
+	public UsuarioModel() {};
 	
-	public Usuario(long id, String nombre) {
+	public UsuarioModel(long id, String nombre) {
 		this.id = id;
 		this.nombre = nombre;
 	}
@@ -44,7 +35,7 @@ public class Usuario {
 	//toString
 	@Override
 	public String toString() {
-		return "Usuario [id=" + id + ", nombre=" + nombre + "]";
+		return "UsuarioModel [id=" + id + ", nombre=" + nombre + "]";
 	}
 	
 }

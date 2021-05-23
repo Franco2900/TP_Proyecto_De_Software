@@ -1,7 +1,7 @@
-package converters;
+package com.UNLaLibrary.TP_Proyecto_De_Software.converters;
 
-import models.UsuarioModel;
-import entities.Usuario;
+import com.UNLaLibrary.TP_Proyecto_De_Software.entities.Usuario;
+import com.UNLaLibrary.TP_Proyecto_De_Software.models.UsuarioModel;
 
 public class UserConverter {
 
