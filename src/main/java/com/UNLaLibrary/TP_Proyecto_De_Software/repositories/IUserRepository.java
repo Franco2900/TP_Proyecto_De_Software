@@ -1,6 +1,6 @@
-package repositories;
+package com.UNLaLibrary.TP_Proyecto_De_Software.repositories;
 
-import entities.Usuario;
+import com.UNLaLibrary.TP_Proyecto_De_Software.entities.Usuario;
 
 public interface IUserRepository{
 
