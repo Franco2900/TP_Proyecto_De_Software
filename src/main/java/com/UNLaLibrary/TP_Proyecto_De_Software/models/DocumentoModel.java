@@ -4,6 +4,7 @@ public class DocumentoModel {
 
 	//Atributos
 	private long id;
+	private String titulo;
 	private String descripcion;
 	private String materia;
 	private String profesor;
@@ -14,9 +15,10 @@ public class DocumentoModel {
 	//Constructores
 	public DocumentoModel() {}
 	
-	public DocumentoModel(long id, String descripcion, String materia, String profesor, String carrera,
+	public DocumentoModel(long id, String titulo, String descripcion, String materia, String profesor, String carrera,
 			String universidad) {
 		this.id = id;
+		this.titulo = titulo;
 		this.descripcion = descripcion;
 		this.materia = materia;
 		this.profesor = profesor;
@@ -32,6 +34,13 @@ public class DocumentoModel {
 	public void setId(long id) {
 		this.id = id;
 	}
+	
+	public String getTitulo() {
+		return this.titulo;
+	}
+	public void setTitulo(String titulo) {
+		this.titulo = titulo;
+	}
 
 	public String getDescripcion() {
 		return descripcion;
@@ -39,7 +48,7 @@ public class DocumentoModel {
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
 	}
-
+	
 	public String getMateria() {
 		return materia;
 	}
@@ -72,8 +81,8 @@ public class DocumentoModel {
 	//toString
 	@Override
 	public String toString() {
-		return "DocumentoModel [id=" + id + ", descripcion=" + descripcion + ", materia=" + materia + ", profesor="
-				+ profesor + ", carrera=" + carrera + ", universidad=" + universidad + "]";
+		return "DocumentoModel [id=" + id + ", titulo=" + titulo + ", descripcion=" + descripcion + ", materia="
+				+ materia + ", profesor=" + profesor + ", carrera=" + carrera + ", universidad=" + universidad + "]";
 	}
 		
 }

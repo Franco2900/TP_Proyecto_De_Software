@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+   <head>
+      <!-- Required meta tags -->
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+   </head>
+   <body>
+		<div class="row gx-4 gx-lg-5">
+           <div class="col-md-4 mb-5">
+             <div class="card h-100">                  
+                 <div class="card-body">
+                      <h2 th:text="${documento.titulo}" class="card-title"></h2>
+                      <p th:text="${documento.universidad}" class="card-text"> </p>
+                      <p th:text="${documento.carrera}" class="card-text"> </p>
+                      <p th:text="${documento.materia}" class="card-text"> </p>
+                      <p th:text="${documento.profesor}" class="card-text"> </p>
+                      <p th:text="${documento.descripcion}" class="card-text"> </p>
+                 </div>
+                 <div class="card-footer"><a class="btn btn-primary btn-sm" href="#!">Descargar</a></div>
+             </div>
+           </div>
+                
+      </div>
+   </body>
+</html>
