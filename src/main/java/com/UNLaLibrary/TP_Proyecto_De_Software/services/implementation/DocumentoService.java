@@ -39,9 +39,8 @@ public class DocumentoService implements IDocumentoService{
         documentoRepository.save(documento);
     }
 
-    // El archivo se guarda sin extension, hay que volver a darsela cuando lo leemos de la DB.
     public void guardarDocumento(MultipartFile archivoPDF, String hash) throws IOException{
-        Path direccionDestino = this.docStorageLocation.resolve(hash);
+        Path direccionDestino = this.docStorageLocation.resolve(hash + ".pdf");
         Files.copy(archivoPDF.getInputStream(), direccionDestino);
     }
 }
