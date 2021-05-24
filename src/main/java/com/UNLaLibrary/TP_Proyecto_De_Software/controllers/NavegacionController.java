@@ -18,9 +18,9 @@ public class NavegacionController {
 	public List<DocumentoModel> datosDePrueba(){
 		ArrayList<DocumentoModel> datos = new ArrayList<>();
 		
-		datos.add(new DocumentoModel(1, "La primera computadora", "Buen libro", "Historia de los sistemas", "Jose", "Informatica", "UNLa") );
-		datos.add(new DocumentoModel(2, "Ecuaciones y ecuaciones", "Libro aburrido", "Matematicas avanzadas", "Pepe", "Fisica", "UNQui") );
-		datos.add(new DocumentoModel(3, "Historia de la literatura", "Libro denso", "Literatura", "Luis", "Historia", "UTN") );
+		datos.add(new DocumentoModel(1, "La primera computadora", "Buen libro", "Historia de los sistemas", "Jose", "Informatica", "UNLa", "") );
+		datos.add(new DocumentoModel(2, "Ecuaciones y ecuaciones", "Libro aburrido", "Matematicas avanzadas", "Pepe", "Fisica", "UNQui", "") );
+		datos.add(new DocumentoModel(3, "Historia de la literatura", "Libro denso", "Literatura", "Luis", "Historia", "UTN", "") );
 		
 		return datos;
 	}
