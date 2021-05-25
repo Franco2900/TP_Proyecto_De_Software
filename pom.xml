@@ -23,6 +23,7 @@
 	
 	<dependencies>
 	
+		<!-- IMPORTANTE, NO AGREGAR DEPENDENCIAS QUE NO SEAN LA FINAL, LAS VERSIONES beta, alfa son inestables -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-thymeleaf</artifactId>
@@ -43,11 +44,10 @@
 			<artifactId>spring-boot-devtools</artifactId>
 		</dependency>
 		
-		<!-- https://mvnrepository.com/artifact/org.hibernate.orm/hibernate-core -->
+		<!-- BASE DE DATOS -->
 		<dependency>
-    		<groupId>org.hibernate.orm</groupId>
+    		<groupId>org.hibernate</groupId>
     		<artifactId>hibernate-core</artifactId>
-    		<version>6.0.0.Alpha4</version>
 		</dependency>
 		
 		<dependency>
@@ -55,11 +55,22 @@
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
 		</dependency>
 		
-		<!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
 		<dependency>
 		    <groupId>mysql</groupId>
 		    <artifactId>mysql-connector-java</artifactId>
 		</dependency>
+		
+		<!-- Spring loaded - con esto no hace falta reiniciar el servidor para actualizar las vistas -->
+		
+		
+		
+		
+		
+		
+		
+		
+<!-- IMPORTANTE, NO AGREGAR DEPENDENCIAS QUE NO SEAN LA FINAL, LAS VERSIONES beta, alfa son inestables -->
+		
 		
 	</dependencies>
 
@@ -68,6 +79,13 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+				<dependencies>
+					<dependency>
+						<groupId>org.springframework</groupId>
+						<artifactId>springloaded</artifactId>
+						<version>1.2.8.RELEASE</version>
+					</dependency>
+				</dependencies>
 			</plugin>
 		</plugins>
 	</build>
