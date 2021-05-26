@@ -11,6 +11,9 @@ spring:
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
     properties:
       dialect: org.hibernate.dialect.MySQL5Dialect
+  thymeleaf:
+    cache: false
 # Direccion en la que se guardan los documentos
 documentos:
   upload-directory: doc-uploads
+  
