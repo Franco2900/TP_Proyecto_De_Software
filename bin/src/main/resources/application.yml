@@ -1,0 +1,19 @@
+spring:
+  datasource:
+    url:  jdbc:mysql://localhost:3306/baseDeDatos_Proyecto
+    username: root
+    password: root
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+      naming: 
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+    properties:
+      dialect: org.hibernate.dialect.MySQL5Dialect
+  thymeleaf:
+    cache: false
+# Direccion en la que se guardan los documentos
+documentos:
+  upload-directory: doc-uploads
+  

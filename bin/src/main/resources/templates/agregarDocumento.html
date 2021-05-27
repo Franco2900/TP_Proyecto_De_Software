@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <!-- Required meta tags -->
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <!-- Bootstrap CSS -->
+      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous">
+      <link href="css/style.css" rel="stylesheet">
+      <title>Agregar documento | UNLa Library</title>
+   </head>
+   </head>
+   <body>
+      <nav class="navbar encabezado">
+         <div class="container-fluid">
+            <span class="navbar-brand mb-0 h1">UNLa Library</span>
+         </div>
+      </nav>
+
+    <div class="container espaciador">
+      <h2 class="mb-4">Agregar documento</h2>
+		    <div class="row gx-4 gx-lg-5">
+          <div class="col-md-4 mb-5 ms-3">
+                <form method="POST" enctype="multipart/form-data" action="/agregarDocumento">
+                    <div class="mb-3">
+                        <label for="titulo" class="form-label">Título</label>
+                        <input type="text" class="form-control" id="titulo" name="titulo" placeholder="Titulo del documento">
+                    </div>
+                    <div class="mb-3">
+                        <label for="descripcion" class="form-label">Descripción</label>
+                        <textarea class="form-control" id="descripcion" name="descripcion" rows="3"></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="archivoPDF" class="form-label">Subir documento</label>
+                        <input class="form-control" type="file" id="archivoPDF" name="archivoPDF">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Confirmar</button>
+                </form>
+           </div>  
+      </div>
+      </div>
+
+      <footer class="footerInferior">
+         <div class="container">
+            <span class="align-middle">Sitio creado por: Grupo 7 | Buenos Aires - Argentina</span>
+         </div>
+      </footer>
+   </body>
+</html>

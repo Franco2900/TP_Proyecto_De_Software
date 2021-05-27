@@ -8,19 +8,27 @@
 		<version>2.4.5</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
+	
 	<groupId>com.UNLaLibrary</groupId>
 	<artifactId>TP_Proyecto_De_Software</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>TP_Proyecto_De_Software</name>
 	<description>Trabaja integrador de Proyecto de Software 2021</description>
+	
 	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<java.version>1.8</java.version>
 	</properties>
+	
 	<dependencies>
+	
+		<!-- IMPORTANTE, NO AGREGAR DEPENDENCIAS QUE NO SEAN LA FINAL, LAS VERSIONES beta, alfa son inestables -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-thymeleaf</artifactId>
 		</dependency>
+		
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
@@ -29,8 +37,41 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
-			<scope>test</scope>
 		</dependency>
+		
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-devtools</artifactId>
+		</dependency>
+		
+		<!-- BASE DE DATOS -->
+		<dependency>
+    		<groupId>org.hibernate</groupId>
+    		<artifactId>hibernate-core</artifactId>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
+		</dependency>
+		
+		<dependency>
+		    <groupId>mysql</groupId>
+		    <artifactId>mysql-connector-java</artifactId>
+		</dependency>
+		
+		<!-- Spring loaded - con esto no hace falta reiniciar el servidor para actualizar las vistas -->
+		
+		
+		
+		
+		
+		
+		
+		
+<!-- IMPORTANTE, NO AGREGAR DEPENDENCIAS QUE NO SEAN LA FINAL, LAS VERSIONES beta, alfa son inestables -->
+		
+		
 	</dependencies>
 
 	<build>
@@ -38,6 +79,13 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+				<dependencies>
+					<dependency>
+						<groupId>org.springframework</groupId>
+						<artifactId>springloaded</artifactId>
+						<version>1.2.8.RELEASE</version>
+					</dependency>
+				</dependencies>
 			</plugin>
 		</plugins>
 	</build>

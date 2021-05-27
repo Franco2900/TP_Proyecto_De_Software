@@ -15,6 +15,7 @@ public class DocumentoModel {
 	private String materia;
 	private String profesor;
 	private String carrera;
+	private String departamento;
 	private String universidad;
 	private String hash;
 	
@@ -22,13 +23,14 @@ public class DocumentoModel {
 	public DocumentoModel() {}
 	
 	public DocumentoModel(long id, String titulo, String descripcion, String materia, 
-			String profesor, String carrera, String universidad, String hash) {
+			String profesor, String carrera, String departamento, String universidad, String hash) {
 		this.id = id;
 		this.titulo = titulo;
 		this.descripcion = descripcion;
 		this.materia = materia;
 		this.profesor = profesor;
 		this.carrera = carrera;
+		this.departamento = departamento;
 		this.universidad = universidad;
 		this.hash = hash;
 	}
@@ -77,6 +79,13 @@ public class DocumentoModel {
 		this.carrera = carrera;
 	}
 
+	public String getDepartamento() {
+		return departamento;
+	}
+	public void setDepartamento(String departamento) {
+		this.departamento = departamento;
+	}
+	
 	public String getUniversidad() {
 		return universidad;
 	}
@@ -91,18 +100,20 @@ public class DocumentoModel {
 	// Genera un codigo unico para nombrar cada documento, asi no se pueden pisar cuando los guardamos
 	public void setHash() throws NoSuchAlgorithmException {
 		String transformedName = new StringBuilder().append(this.titulo).append(this.profesor)
-                .append(this.descripcion).append(this.universidad).append(this.carrera)
+                .append(this.descripcion).append(this.universidad).append(this.carrera).append(this.departamento)
                 .append(this.materia).append(new Date().getTime()).toString();
 		MessageDigest messageDigest = MessageDigest.getInstance("MD5");
 		messageDigest.update(transformedName.getBytes(StandardCharsets.UTF_8));
 		this.hash = new BigInteger(1, messageDigest.digest()).toString(16);
 	}
 	
+	
 	//toString
 	@Override
 	public String toString() {
 		return "DocumentoModel [id=" + id + ", titulo=" + titulo + ", descripcion=" + descripcion + ", materia="
-				+ materia + ", profesor=" + profesor + ", carrera=" + carrera + ", universidad=" + universidad + "]";
+				+ materia + ", profesor=" + profesor + ", carrera=" + carrera + ", departamento=" + departamento
+				+ ", universidad=" + universidad + ", hash=" + hash + "]";
 	}
 		
 }
