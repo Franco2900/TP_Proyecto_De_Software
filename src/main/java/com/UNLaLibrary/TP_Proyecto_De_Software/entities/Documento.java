@@ -14,19 +14,21 @@ public class Documento {
 	private String materia;
 	private String profesor;
 	private String carrera;
+	private String departamento;
 	private String universidad;
     @Column(name = "hashArchivo")
 	private String hash;
 
     public Documento() {}
 
-    public Documento(long idDocumento, String titulo, String descripcion, String materia, String profesor, String carrera, String universidad, String hash) {
+    public Documento(long idDocumento, String titulo, String descripcion, String materia, String profesor, String carrera, String departamento, String universidad, String hash) {
         this.idDocumento = idDocumento;
         this.titulo = titulo;
         this.descripcion = descripcion;
         this.materia = materia;
         this.profesor = profesor;
         this.carrera = carrera;
+        this.departamento = departamento;
         this.universidad = universidad;
         this.hash = hash;
     }
@@ -78,7 +80,15 @@ public class Documento {
     public void setCarrera(String carrera) {
         this.carrera = carrera;
     }
+    
+    public String getDepartamento() {
+    	return departamento;
+    }
 
+    public void setDepartamento(String departamento) {
+    	this.departamento = departamento;
+    }
+    
     public String getUniversidad() {
         return this.universidad;
     }
@@ -104,6 +114,7 @@ public class Documento {
             ", materia='" + getMateria() + "'" +
             ", profesor='" + getProfesor() + "'" +
             ", carrera='" + getCarrera() + "'" +
+            ", departamento='" + getDepartamento() + "'" +
             ", universidad='" + getUniversidad() + "'" +
             ", hash='" + getHash() + "'" +
             "}";

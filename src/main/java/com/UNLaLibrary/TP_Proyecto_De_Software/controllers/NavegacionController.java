@@ -18,9 +18,9 @@ public class NavegacionController {
 	public List<DocumentoModel> datosDePrueba(){
 		ArrayList<DocumentoModel> datos = new ArrayList<>();
 		
-		datos.add(new DocumentoModel(1, "La primera computadora", "Buen libro", "Historia de los sistemas", "Jose", "Informatica", "UNLa", "") );
-		datos.add(new DocumentoModel(2, "Ecuaciones y ecuaciones", "Libro aburrido", "Matematicas avanzadas", "Pepe", "Fisica", "UNQui", "") );
-		datos.add(new DocumentoModel(3, "Historia de la literatura", "Libro denso", "Literatura", "Luis", "Historia", "UTN", "") );
+		datos.add(new DocumentoModel(1, "La primera computadora", "Buen libro", "Historia de los sistemas", "Jose", "Informatica", "Desarrollo Productivo y Tecnológico", "UNLa", "") );
+		datos.add(new DocumentoModel(2, "Ecuaciones y ecuaciones", "Libro aburrido", "Matematicas avanzadas", "Pepe", "Fisica", "Desarrollo Productivo y Tecnológico", "UNQui", "") );
+		datos.add(new DocumentoModel(3, "Historia de la literatura", "Libro denso", "Literatura", "Luis", "Historia", "Humanidades y Artes", "UTN", "") );
 		
 		return datos;
 	}
@@ -50,6 +50,78 @@ public class NavegacionController {
 		//List<DocumentoModel> documentoFiltrado = this.datosDePrueba().stream().filter((documento)->{return documento.getId()==id;}).collect(Collectors.toList());
 		
 		model.addObject("documento", documentoFiltrado.get(0) );
+		return model;
+	}
+	
+	
+	@GetMapping("/listadoDepartamentos") //Para ver los departamentos
+	public ModelAndView navegarDepartamentos() {
+		ModelAndView model = new ModelAndView("filtrarPorDepartamento");
+		return model;
+	}
+	
+	
+	@GetMapping("/listadoDepartamentos/Productivo_Tecnologico") //Para ver los documentos del departamento Desarrollo Productivo y Tecnológico
+	public ModelAndView Productivo_Tecnologico() {
+		ModelAndView model = new ModelAndView("listadoDocumentos");
+		
+		List<DocumentoModel> listaDocumentosFiltrados = new ArrayList<DocumentoModel>();
+		
+		for(DocumentoModel documento: datosDePrueba() ) {
+			if(documento.getDepartamento().equals("Desarrollo Productivo y Tecnológico") ) {
+				listaDocumentosFiltrados.add(documento);
+			}
+		}
+		
+		model.addObject("ListaDocumentos", listaDocumentosFiltrados);
+		return model;
+	}
+	
+	@GetMapping("/listadoDepartamentos/Humanidades_Artes") //Para ver los documentos del departamento Humanidades y Artes
+	public ModelAndView Humanidades_Artes() {
+		ModelAndView model = new ModelAndView("listadoDocumentos");
+		
+		List<DocumentoModel> listaDocumentosFiltrados = new ArrayList<DocumentoModel>();
+		
+		for(DocumentoModel documento: datosDePrueba() ) {
+			if(documento.getDepartamento().equals("Humanidades y Artes") ) {
+				listaDocumentosFiltrados.add(documento);
+			}
+		}
+		
+		model.addObject("ListaDocumentos", listaDocumentosFiltrados);
+		return model;
+	}
+	
+	@GetMapping("/listadoDepartamentos/Politicas_Publicas") //Para ver los documentos del departamento Planificación y Políticas Públicas
+	public ModelAndView Politicas_Publicas() {
+		ModelAndView model = new ModelAndView("listadoDocumentos");
+		
+		List<DocumentoModel> listaDocumentosFiltrados = new ArrayList<DocumentoModel>();
+		
+		for(DocumentoModel documento: datosDePrueba() ) {
+			if(documento.getDepartamento().equals("Planificación y Políticas Públicas") ) {
+				listaDocumentosFiltrados.add(documento);
+			}
+		}
+		
+		model.addObject("ListaDocumentos", listaDocumentosFiltrados);
+		return model;
+	}
+	
+	@GetMapping("/listadoDepartamentos/Salud") //Para ver los documentos del departamento Salud Comunitaria
+	public ModelAndView Salud() {
+		ModelAndView model = new ModelAndView("listadoDocumentos");
+		
+		List<DocumentoModel> listaDocumentosFiltrados = new ArrayList<DocumentoModel>();
+		
+		for(DocumentoModel documento: datosDePrueba() ) {
+			if(documento.getDepartamento().equals("Salud Comunitaria") ) {
+				listaDocumentosFiltrados.add(documento);
+			}
+		}
+		
+		model.addObject("ListaDocumentos", listaDocumentosFiltrados);
 		return model;
 	}
 	

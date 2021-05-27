@@ -29,7 +29,7 @@ public class DocumentoController {
     public String agregarDocumento(@RequestParam(value = "archivoPDF") MultipartFile archivoPDF, 
         @RequestParam("titulo") String titulo, @RequestParam("descripcion") String descripcion) throws NoSuchAlgorithmException, IOException{
         DocumentoModel documentoModel = new DocumentoModel(0L, titulo, descripcion, "Programacion Concurrente", 
-        "Hernan Merlino", "Licenciatura en sistemas", "UNLA", "");
+        "Hernan Merlino", "Licenciatura en sistemas", "Desarrollo Productivo y Tecnológico", "UNLA", "");
         documentoService.agregarDocumento(documentoModel, archivoPDF);
 
         return "agregarDocumento";
