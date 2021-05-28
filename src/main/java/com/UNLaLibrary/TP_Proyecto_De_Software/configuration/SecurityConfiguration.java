@@ -1,6 +1,6 @@
 package com.UNLaLibrary.TP_Proyecto_De_Software.configuration;
 
-import com.UNLaLibrary.TP_Proyecto_De_Software.services.implementation.UserService;
+import services.implementation.UserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
