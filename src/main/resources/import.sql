@@ -1,0 +1,2 @@
+insert into userRole(role) VALUES ('ROLE_ADMIN');
+insert into user(email, enabled, password, username, userRole) VALUES('mengano@gmail.com', true, '$2y$12$7p2RevsYeODhvje4Im8laOv0fR26Zcs8vUEck82VkAo6yuvbJ3xle', 'admin', 1);

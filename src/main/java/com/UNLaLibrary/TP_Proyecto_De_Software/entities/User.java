@@ -31,7 +31,7 @@ public class User {
 	private boolean enabled;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name="userRole_id", nullable=false)
+	@JoinColumn(name="userRole", nullable=false)
 	private UserRole userRole;
 		
 	public User() {}

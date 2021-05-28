@@ -17,7 +17,6 @@ import com.UNLaLibrary.TP_Proyecto_De_Software.services.implementation.UserServi
 
 
 @Controller
-@RequestMapping("/usuario")
 public class UserController {
 
 	@Autowired
@@ -49,7 +48,7 @@ public class UserController {
 	
 	@GetMapping("/loginsuccess")
 	public String loginCheck() {
-		return "redirect:/index";
+		return "redirect:/";
 	}
 	
 	
