@@ -17,21 +17,9 @@ import com.UNLaLibrary.TP_Proyecto_De_Software.services.implementation.UserServi
 
 
 @Controller
-@RequestMapping("/usuario")
 public class UserController {
 
-	@Autowired
-	@Qualifier("userService")
-	private UserService userService;
 	
-	@Autowired
-	@Qualifier("userRoleService")
-	private UserRoleService userRoleService;	
-	
-		
-	@Autowired
-	@Qualifier("userConverter")
-	private UserConverter userConverter;
 	
 	@GetMapping("/login")
 	public String login(Model model,
@@ -47,10 +35,10 @@ public class UserController {
 		return "user/logout";
 	}
 	
-	@GetMapping("/loginsuccess")
-	public String loginCheck() {
-		return "redirect:/index";
-	}
+	//@GetMapping("/loginsuccess")
+	//public String loginCheck() {
+		//return "redirect:/index";
+	//}
 	
 	
 	
