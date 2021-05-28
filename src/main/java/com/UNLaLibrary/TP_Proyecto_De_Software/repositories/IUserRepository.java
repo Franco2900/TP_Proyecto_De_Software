@@ -1,4 +1,4 @@
-package repositories;
+package com.UNLaLibrary.TP_Proyecto_De_Software.repositories;
 
 import java.io.Serializable;
 //import java.util.List;
@@ -8,9 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import entities.User;
-
-
+import com.UNLaLibrary.TP_Proyecto_De_Software.entities.User;
 
 @Repository("userRepository")
 public interface IUserRepository extends JpaRepository<User, Serializable> {

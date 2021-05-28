@@ -1,4 +1,4 @@
-package services.implementation;
+package com.UNLaLibrary.TP_Proyecto_De_Software.services.implementation;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,10 +10,10 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import converters.UserRoleConverter;
-import entities.UserRole;
-import models.UserRoleModel;
-import repositories.IUserRoleRepository;
+import com.UNLaLibrary.TP_Proyecto_De_Software.converters.UserRoleConverter;
+import com.UNLaLibrary.TP_Proyecto_De_Software.entities.UserRole;
+import com.UNLaLibrary.TP_Proyecto_De_Software.models.UserRoleModel;
+import com.UNLaLibrary.TP_Proyecto_De_Software.repositories.IUserRoleRepository;
 
 
 
@@ -30,7 +30,7 @@ public class UserRoleService implements UserDetailsService{
 	
 	public List<UserRoleModel> getAll() {
 		List<UserRoleModel> roles = new ArrayList<>();
-		for (entities.UserRole r: userRoleRepository.findAll()) {
+		for (UserRole r: userRoleRepository.findAll()) {
 			roles.add(userRoleConverter.entityToModel(r));
 		}
 		return roles;

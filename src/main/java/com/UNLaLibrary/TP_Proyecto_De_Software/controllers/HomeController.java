@@ -1,4 +1,4 @@
-package controllers;
+package com.UNLaLibrary.TP_Proyecto_De_Software.controllers;
 
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller; //Para indicar que esta clase es un Controller

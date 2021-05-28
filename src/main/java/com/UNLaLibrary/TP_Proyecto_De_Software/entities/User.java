@@ -1,4 +1,4 @@
-package entities;
+package com.UNLaLibrary.TP_Proyecto_De_Software.entities;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

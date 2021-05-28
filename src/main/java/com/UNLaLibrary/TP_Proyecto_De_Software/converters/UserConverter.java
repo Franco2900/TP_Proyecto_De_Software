@@ -1,14 +1,11 @@
-package converters;
+package com.UNLaLibrary.TP_Proyecto_De_Software.converters;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
-import entities.User;
-import models.UserModel;
-
-
-
+import com.UNLaLibrary.TP_Proyecto_De_Software.entities.User;
+import com.UNLaLibrary.TP_Proyecto_De_Software.models.UserModel;
 
 @Component("userConverter")
 public class UserConverter {

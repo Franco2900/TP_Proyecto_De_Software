@@ -1,4 +1,4 @@
-package models;
+package com.UNLaLibrary.TP_Proyecto_De_Software.models;
 
 public class UserModel {
 	private int id;

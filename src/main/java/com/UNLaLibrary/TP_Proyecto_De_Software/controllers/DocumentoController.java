@@ -1,4 +1,4 @@
-package controllers;
+package com.UNLaLibrary.TP_Proyecto_De_Software.controllers;
 
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
-import models.DocumentoModel;
-import services.implementation.DocumentoService;
+import com.UNLaLibrary.TP_Proyecto_De_Software.models.DocumentoModel;
+import com.UNLaLibrary.TP_Proyecto_De_Software.services.implementation.DocumentoService;
 
 @Controller
 public class DocumentoController {

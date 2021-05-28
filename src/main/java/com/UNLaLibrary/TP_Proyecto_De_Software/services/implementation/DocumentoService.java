@@ -1,10 +1,10 @@
-package services.implementation;
+package com.UNLaLibrary.TP_Proyecto_De_Software.services.implementation;
 
-import services.IDocumentoService;
-import models.DocumentoModel;
-import property.DocumentoStorageProperty;
-import repositories.IDocumentoRepository;
-import entities.Documento;
+import com.UNLaLibrary.TP_Proyecto_De_Software.services.IDocumentoService;
+import com.UNLaLibrary.TP_Proyecto_De_Software.models.DocumentoModel;
+import com.UNLaLibrary.TP_Proyecto_De_Software.property.DocumentoStorageProperty;
+import com.UNLaLibrary.TP_Proyecto_De_Software.repositories.IDocumentoRepository;
+import com.UNLaLibrary.TP_Proyecto_De_Software.entities.Documento;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -16,7 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import converters.DocumentoConverter;
+import com.UNLaLibrary.TP_Proyecto_De_Software.converters.DocumentoConverter;
 
 @Service
 public class DocumentoService implements IDocumentoService{

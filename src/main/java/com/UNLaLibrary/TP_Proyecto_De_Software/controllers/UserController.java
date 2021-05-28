@@ -1,4 +1,4 @@
-package controllers;
+package com.UNLaLibrary.TP_Proyecto_De_Software.controllers;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,9 +9,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import converters.UserConverter;
-import services.implementation.UserRoleService;
-import services.implementation.UserService;
+import com.UNLaLibrary.TP_Proyecto_De_Software.converters.UserConverter;
+import com.UNLaLibrary.TP_Proyecto_De_Software.services.implementation.UserRoleService;
+import com.UNLaLibrary.TP_Proyecto_De_Software.services.implementation.UserService;
 
 
 
