@@ -1,4 +1,4 @@
-package com.UNLaLibrary.TP_Proyecto_De_Software.services.implementation;
+package services.implementation;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -16,10 +16,10 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import com.UNLaLibrary.TP_Proyecto_De_Software.converters.UserConverter;
-import com.UNLaLibrary.TP_Proyecto_De_Software.entities.UserRole;
-import com.UNLaLibrary.TP_Proyecto_De_Software.models.UserModel;
-import com.UNLaLibrary.TP_Proyecto_De_Software.repositories.IUserRepository;
+import converters.UserConverter;
+import entities.UserRole;
+import models.UserModel;
+import repositories.IUserRepository;
 
 
 
@@ -37,11 +37,11 @@ public class UserService implements UserDetailsService {
 	
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		com.UNLaLibrary.TP_Proyecto_De_Software.entities.User user = userRepository.findByUsernameAndFetchUserRolesEagerly(username);
+		entities.User user = userRepository.findByUsernameAndFetchUserRolesEagerly(username);
 		return (UserDetails) buildUser(user, buildGrantedAuthorities(user.getUserRole()));
 	}
 	
-	private User buildUser(com.UNLaLibrary.TP_Proyecto_De_Software.entities.User user, List<GrantedAuthority> grantedAuthorities) {
+	private User buildUser(entities.User user, List<GrantedAuthority> grantedAuthorities) {
 		return new User(user.getUsername(), user.getPassword(), user.isEnabled(),
 						true, true, true, 
 						grantedAuthorities);
@@ -58,13 +58,13 @@ public class UserService implements UserDetailsService {
 		return new SimpleGrantedAuthority(userRole2.getRole());
 	}
 	
-	public com.UNLaLibrary.TP_Proyecto_De_Software.entities.User save(com.UNLaLibrary.TP_Proyecto_De_Software.entities.User user) {	
+	public entities.User save(entities.User user) {	
 		return userRepository.save(user);
 	}
 	
 	public List<UserModel> getAll(){ 
 		List<UserModel> usuarios = new ArrayList<>();
-		for (com.UNLaLibrary.TP_Proyecto_De_Software.entities.User u: userRepository.findAll()) {
+		for (entities.User u: userRepository.findAll()) {
 			usuarios.add(userConverter.entityToModel(u));
 		}
 		return usuarios;

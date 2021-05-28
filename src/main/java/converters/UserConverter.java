@@ -1,11 +1,11 @@
-package com.UNLaLibrary.TP_Proyecto_De_Software.converters;
+package converters;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
-import com.UNLaLibrary.TP_Proyecto_De_Software.entities.User;
-import com.UNLaLibrary.TP_Proyecto_De_Software.models.UserModel;
+import entities.User;
+import models.UserModel;
 
 
 

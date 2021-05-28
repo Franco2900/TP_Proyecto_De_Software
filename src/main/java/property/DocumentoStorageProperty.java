@@ -1,4 +1,4 @@
-package com.UNLaLibrary.TP_Proyecto_De_Software.property;
+package property;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 

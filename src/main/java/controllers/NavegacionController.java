@@ -1,12 +1,13 @@
-package com.UNLaLibrary.TP_Proyecto_De_Software.controllers;
+package controllers;
 
 import org.springframework.stereotype.Controller; //Para indicar que esta clase es un Controller
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping; //Para indicar la ruta (también llamado URL) por la cual se va a llamar a este controller y sus metodos. EJ: http:/wikipedia/inicio
 import org.springframework.web.servlet.ModelAndView; //Para poder usar mezclar las vistas html con los modelos
-import org.springframework.web.bind.annotation.RequestParam;//Para pedir parametros y trabajar con ellos en los ModelAndView
 
-import com.UNLaLibrary.TP_Proyecto_De_Software.models.DocumentoModel;
+import models.DocumentoModel;
+
+import org.springframework.web.bind.annotation.RequestParam;//Para pedir parametros y trabajar con ellos en los ModelAndView
 
 import java.util.ArrayList;
 import java.util.List;

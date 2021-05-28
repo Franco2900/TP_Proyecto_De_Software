@@ -1,7 +1,7 @@
-package com.UNLaLibrary.TP_Proyecto_De_Software.converters;
+package converters;
 
-import com.UNLaLibrary.TP_Proyecto_De_Software.entities.Documento;
-import com.UNLaLibrary.TP_Proyecto_De_Software.models.DocumentoModel;
+import entities.Documento;
+import models.DocumentoModel;
 
 public class DocumentoConverter {
 

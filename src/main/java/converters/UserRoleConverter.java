@@ -1,9 +1,9 @@
-package com.UNLaLibrary.TP_Proyecto_De_Software.converters;
+package converters;
 
 import org.springframework.stereotype.Component;
 
-import com.UNLaLibrary.TP_Proyecto_De_Software.entities.UserRole;
-import com.UNLaLibrary.TP_Proyecto_De_Software.models.UserRoleModel;
+import entities.UserRole;
+import models.UserRoleModel;
 
 
 

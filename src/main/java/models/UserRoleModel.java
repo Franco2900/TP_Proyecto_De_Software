@@ -1,4 +1,4 @@
-package com.UNLaLibrary.TP_Proyecto_De_Software.models;
+package models;
 
 import java.util.Set;
 

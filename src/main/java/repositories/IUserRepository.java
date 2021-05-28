@@ -1,4 +1,4 @@
-package com.UNLaLibrary.TP_Proyecto_De_Software.repositories;
+package repositories;
 
 import java.io.Serializable;
 //import java.util.List;
@@ -8,7 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import com.UNLaLibrary.TP_Proyecto_De_Software.entities.User;
+import entities.User;
 
 
 

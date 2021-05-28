@@ -1,4 +1,4 @@
-package com.UNLaLibrary.TP_Proyecto_De_Software.entities;
+package entities;
 
 import javax.persistence.*;
 
