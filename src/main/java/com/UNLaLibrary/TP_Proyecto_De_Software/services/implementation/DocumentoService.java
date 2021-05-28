@@ -12,6 +12,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.security.NoSuchAlgorithmException;
+import java.util.List;
+import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -29,6 +31,7 @@ public class DocumentoService implements IDocumentoService{
         Files.createDirectories(this.docStorageLocation);
     }
 
+    // Agrega el documento completo a la base de datos
     public void agregarDocumento(DocumentoModel documentoModel, MultipartFile archivoPDF) throws NoSuchAlgorithmException, IOException{
         documentoModel.setHash();
         guardarDocumento(archivoPDF, documentoModel.getHash());
@@ -39,8 +42,21 @@ public class DocumentoService implements IDocumentoService{
         documentoRepository.save(documento);
     }
 
+    // Guarda el pdf con el nombre del hash generado
     public void guardarDocumento(MultipartFile archivoPDF, String hash) throws IOException{
         Path direccionDestino = this.docStorageLocation.resolve(hash + ".pdf");
         Files.copy(archivoPDF.getInputStream(), direccionDestino);
+    }
+
+    // Devuelve todos los documentos sin filtrar
+    public List<DocumentoModel> traerDocumentos(){
+        List<DocumentoModel> documentoModels = new ArrayList<DocumentoModel>();
+        List<Documento> documentos = documentoRepository.findAll();
+        DocumentoConverter documentoConverter = new DocumentoConverter();
+
+        for(Documento d:documentos){
+            documentoModels.add(documentoConverter.entityToModel(d));
+        }
+        return documentoModels;
     }
 }
