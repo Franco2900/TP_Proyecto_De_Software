@@ -24,15 +24,15 @@
                 <form method="POST" enctype="multipart/form-data" action="/agregarDocumento">
                     <div class="mb-3">
                         <label for="titulo" class="form-label">Título</label>
-                        <input type="text" class="form-control" id="titulo" name="titulo" placeholder="Titulo del documento">
+                        <input type="text" class="form-control" id="titulo" name="titulo" placeholder="Titulo del documento" required>
                     </div>
                     <div class="mb-3">
                         <label for="descripcion" class="form-label">Descripción</label>
-                        <textarea class="form-control" id="descripcion" name="descripcion" rows="3"></textarea>
+                        <textarea class="form-control" id="descripcion" name="descripcion" rows="3" required></textarea>
                     </div>
                     <div class="mb-3">
                         <label for="archivoPDF" class="form-label">Subir documento</label>
-                        <input class="form-control" type="file" id="archivoPDF" name="archivoPDF">
+                        <input class="form-control" type="file" id="archivoPDF" name="archivoPDF" required>
                     </div>
                     <button type="submit" class="btn btn-primary">Confirmar</button>
                 </form>
