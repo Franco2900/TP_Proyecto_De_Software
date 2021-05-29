@@ -1,5 +1,6 @@
 package com.UNLaLibrary.TP_Proyecto_De_Software.controllers;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller; //Para indicar que esta clase es un Controller
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping; //Para indicar la ruta (también llamado URL) por la cual se va a llamar a este controller y sus metodos. EJ: http:/wikipedia/inicio
@@ -7,29 +8,22 @@ import org.springframework.web.servlet.ModelAndView; //Para poder usar mezclar l
 import org.springframework.web.bind.annotation.RequestParam;//Para pedir parametros y trabajar con ellos en los ModelAndView
 
 import com.UNLaLibrary.TP_Proyecto_De_Software.models.DocumentoModel;
+import com.UNLaLibrary.TP_Proyecto_De_Software.services.IDocumentoService;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
+
 
 @Controller
 public class NavegacionController {
+	@Autowired
+	private IDocumentoService documentoService;
 	
-	public List<DocumentoModel> datosDePrueba(){
-		ArrayList<DocumentoModel> datos = new ArrayList<>();
-		
-		datos.add(new DocumentoModel(1, "La primera computadora", "Buen libro", "Historia de los sistemas", "Jose", "Informatica", "Desarrollo Productivo y Tecnológico", "UNLa", "") );
-		datos.add(new DocumentoModel(2, "Ecuaciones y ecuaciones", "Libro aburrido", "Matematicas avanzadas", "Pepe", "Fisica", "Desarrollo Productivo y Tecnológico", "UNQui", "") );
-		datos.add(new DocumentoModel(3, "Historia de la literatura", "Libro denso", "Literatura", "Luis", "Historia", "Humanidades y Artes", "UTN", "") );
-		
-		return datos;
-	}
-	
-	
+	/*
 	@RequestMapping("/listadoDocumentos") //Para ver todos los documentos disponibles
 	public ModelAndView navegar() {
 		ModelAndView model = new ModelAndView("listadoDocumentos");
-		model.addObject("ListaDocumentos", datosDePrueba() );
+		model.addObject("ListaDocumentos", documentoService.traerDocumentos() );
 		return model;
 	}
 	
@@ -39,7 +33,7 @@ public class NavegacionController {
 		ModelAndView model = new ModelAndView("documento");
 		
 		List<DocumentoModel> documentoFiltrado = new ArrayList<DocumentoModel>();
-		for(DocumentoModel documento: datosDePrueba() ) {
+		for(DocumentoModel documento: documentoService.traerDocumentos() ) {
 			if(documento.getId() == id) {
 				documentoFiltrado.add(documento);
 				break;
@@ -56,7 +50,7 @@ public class NavegacionController {
 	
 	@GetMapping("/listadoDepartamentos") //Para ver los departamentos
 	public ModelAndView navegarDepartamentos() {
-		ModelAndView model = new ModelAndView("filtrarPorDepartamento");
+		ModelAndView model = new ModelAndView("listadoDepartamentos");
 		return model;
 	}
 	
@@ -67,7 +61,7 @@ public class NavegacionController {
 		
 		List<DocumentoModel> listaDocumentosFiltrados = new ArrayList<DocumentoModel>();
 		
-		for(DocumentoModel documento: datosDePrueba() ) {
+		for(DocumentoModel documento: documentoService.traerDocumentos() ) {
 			if(documento.getDepartamento().equals("Desarrollo Productivo y Tecnológico") ) {
 				listaDocumentosFiltrados.add(documento);
 			}
@@ -83,7 +77,7 @@ public class NavegacionController {
 		
 		List<DocumentoModel> listaDocumentosFiltrados = new ArrayList<DocumentoModel>();
 		
-		for(DocumentoModel documento: datosDePrueba() ) {
+		for(DocumentoModel documento: documentoService.traerDocumentos() ) {
 			if(documento.getDepartamento().equals("Humanidades y Artes") ) {
 				listaDocumentosFiltrados.add(documento);
 			}
@@ -99,7 +93,7 @@ public class NavegacionController {
 		
 		List<DocumentoModel> listaDocumentosFiltrados = new ArrayList<DocumentoModel>();
 		
-		for(DocumentoModel documento: datosDePrueba() ) {
+		for(DocumentoModel documento: documentoService.traerDocumentos() ) {
 			if(documento.getDepartamento().equals("Planificación y Políticas Públicas") ) {
 				listaDocumentosFiltrados.add(documento);
 			}
@@ -115,7 +109,7 @@ public class NavegacionController {
 		
 		List<DocumentoModel> listaDocumentosFiltrados = new ArrayList<DocumentoModel>();
 		
-		for(DocumentoModel documento: datosDePrueba() ) {
+		for(DocumentoModel documento: documentoService.traerDocumentos() ) {
 			if(documento.getDepartamento().equals("Salud Comunitaria") ) {
 				listaDocumentosFiltrados.add(documento);
 			}
@@ -124,5 +118,46 @@ public class NavegacionController {
 		model.addObject("ListaDocumentos", listaDocumentosFiltrados);
 		return model;
 	}
+	
+	
+	@GetMapping("/listadoMaterias") 
+	public ModelAndView navegarMaterias() { //Las materias no siempre van a ser las mismas. Debería revisar la base de datos para recibir los documentos
+		ModelAndView model = new ModelAndView("listadoMaterias");	
+		List<DocumentoModel> listaMaterias = new ArrayList<DocumentoModel>();
+		
+		//Recorro la lista de documentos y añado a la listaMaterias un solo documento por materia. Despues en la vista uso esos documentos para sacar el nombre de la materia
+		for(DocumentoModel documento: documentoService.traerDocumentos() ) { //Recorro la lista de documentos
+			
+			if(listaMaterias.isEmpty() ) listaMaterias.add(documento); //En la primera vuelta listaMaterias siempre va a estar vacio así que le añado una materia
+			boolean bandera = false; 								   //bandera para saber si una materia se repite o no
+			
+			for(DocumentoModel doc: listaMaterias) { 				  //Recorro la listaMaterias para chequear si ya esta la materia o no en la lista
+				if(documento.getMateria().equals(doc.getMateria()) ){ //Si ya esta la materia en listaMaterias dejo de chequear 
+					bandera = true;
+					break;
+				}
+			}
+			
+			if(bandera == false) listaMaterias.add(documento);
+		}
+		
+		model.addObject("listaMaterias", listaMaterias);
+		return model;
+	}
+	
+	
+	@GetMapping("listadoMaterias/materia") //Para ver todos los documentos de una materia
+	public ModelAndView materiaIndividual(@RequestParam (defaultValue="Historia de los sistemas", name="materia") String materia) {
+		ModelAndView model = new ModelAndView("listadoDocumentos");
+		List<DocumentoModel> listaDocumentosDeLaMateria = new ArrayList<DocumentoModel>();
+		
+		for(DocumentoModel documento: documentoService.traerDocumentos() ) {
+			if(documento.getMateria().equals(materia) ) listaDocumentosDeLaMateria.add(documento);
+		}
+		
+		model.addObject("ListaDocumentos", listaDocumentosDeLaMateria);
+		return model;
+	}
+	*/
 	
 }
