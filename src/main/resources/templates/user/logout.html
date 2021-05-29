@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Login</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="jumbotron">
+        <h1 class="display-5">Logout Succesfully</h1>
+        <h1 class="display-5">Login</h1>
+        <form th:action="@{/loginprocess}" method="post">
+          <input type="text" name="username" id="username" placeholder="Username" />
+          <input type="text" name="password" id="password" placeholder="Password" />
+          <input type="submit" />
+        </form>
+      </div>
+    </div>
+  </body>
+</html>

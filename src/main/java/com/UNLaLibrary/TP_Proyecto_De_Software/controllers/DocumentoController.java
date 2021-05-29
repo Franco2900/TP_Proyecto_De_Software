@@ -32,6 +32,6 @@ public class DocumentoController {
         "Hernan Merlino", "Licenciatura en sistemas", "Desarrollo Productivo y Tecnológico", "UNLA", "");
         documentoService.agregarDocumento(documentoModel, archivoPDF);
 
-        return "agregarDocumento";
+        return "redirect:/listadoDocumentos";
     }
 }

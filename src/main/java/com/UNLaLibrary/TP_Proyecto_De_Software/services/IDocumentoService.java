@@ -5,9 +5,9 @@ import java.io.InputStream;
 import java.security.NoSuchAlgorithmException;
 import java.util.List;
 
-import com.UNLaLibrary.TP_Proyecto_De_Software.models.DocumentoModel;
-
 import org.springframework.web.multipart.MultipartFile;
+
+import com.UNLaLibrary.TP_Proyecto_De_Software.models.DocumentoModel;
 
 public interface IDocumentoService {
     public void agregarDocumento(DocumentoModel documentoModel, MultipartFile archivoPDF) throws NoSuchAlgorithmException, IOException;
