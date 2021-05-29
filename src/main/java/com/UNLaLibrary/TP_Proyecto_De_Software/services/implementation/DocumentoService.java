@@ -7,12 +7,16 @@ import com.UNLaLibrary.TP_Proyecto_De_Software.models.DocumentoModel;
 import com.UNLaLibrary.TP_Proyecto_De_Software.property.DocumentoStorageProperty;
 import com.UNLaLibrary.TP_Proyecto_De_Software.converters.DocumentoConverter;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.security.NoSuchAlgorithmException;
 import java.util.List;
+import java.util.Optional;
 import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,5 +62,14 @@ public class DocumentoService implements IDocumentoService{
             documentoModels.add(documentoConverter.entityToModel(d));
         }
         return documentoModels;
+    }
+
+    // Busco el archivo con el hash y devuelvo el stream
+    public InputStream descargarDocumento(long id) throws IOException{
+        Optional<Documento> documento = documentoRepository.findById(id);
+        File archivoPDF = this.docStorageLocation.resolve(documento.get().getHash() + ".pdf").toFile();
+        InputStream is = new FileInputStream(archivoPDF);
+
+        return is;
     }
 }

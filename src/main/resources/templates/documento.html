@@ -31,8 +31,8 @@
               <p th:text="${documento.descripcion}" class="card-text"> </p>
             </div>
             <div class="card-footer">
-              <a class="btn btn-outline-primary btn-md" th:href="@{/listadoDocumentos/documento?id=} + ${documento.id}">Vista previa</a>
-              <a class="btn btn-primary btn-md" th:href="@{/listadoDocumentos/documento?id=} + ${documento.id}" download="@{documento.titulo}">Descargar</a>
+              <a class="btn btn-outline-primary btn-md" th:href="@{/listadoDocumentos/documento?id={id}(id=${documento.id})}">Vista previa</a>
+              <a class="btn btn-primary btn-md" th:href="@{/listadoDocumentos/documento/descarga?id={id}(id=${documento.id})}" th:download="${documento.titulo}">Descargar</a>
             </div>
           </div>
         </div>
