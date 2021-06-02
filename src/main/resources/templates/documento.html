@@ -23,7 +23,26 @@
               <p th:text="${documento.descripcion}" class="card-text"> </p>
             </div>
             <div class="card-footer">
-              <a class="btn btn-outline-primary btn-md" th:href="@{/listadoDocumentos/documento?id={id}(id=${documento.id})}">Vista previa</a>
+              <!-- Vista previa del documento -->
+              <button id="vpButton"type="button" class="btn btn-outline-primary btn-md" data-bs-toggle="modal" data-bs-target="#vistaPrevia">Vista previa</button>
+              <div class="modal fade" id="vistaPrevia" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" aria-labelledby="vistaPreviaLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-scrollable modal-lg">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="vistaPreviaLabel" th:text="${documento.titulo}"></h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div id="vpContainer" class="modal-body px-0 py-0">
+                      <canvas id="vistaPreviaCanvas"></canvas>
+                    </div>
+                    <div class="modal-footer d-flex justify-content-center">
+                      <button type="button" class="btn btn-primary" id="prevPage">Anterior</button>
+                      <p>Pagina <span id="pageNum"></span> de <span id="pageCount"></span></p>
+                      <button type="button" class="btn btn-primary" id="nextPage">Siguiente</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
               <a class="btn btn-primary btn-md" th:href="@{/listadoDocumentos/documento/descarga?id={id}(id=${documento.id})}" th:download="${documento.titulo}">Descargar</a>
             </div>
           </div>
@@ -32,5 +51,11 @@
     </div>
 
     <footer th:replace="fragments/footer :: footer"> </footer>
+    <footer th:replace="fragments/scripts :: scripts"> </footer>
+
+    <!-- Estos scrips solo se usan aca -->
+    <script src="https://cdn.jsdelivr.net/npm/pdfjs-dist@2.7.570/build/pdf.min.js"></script> 
+    <script src="https://cdn.jsdelivr.net/npm/pdfjs-dist@2.7.570/build/pdf.worker.min.js"></script> 
+    <script th:src="@{../js/vistaPrevia.js}"></script>
   </body>
 </html>
