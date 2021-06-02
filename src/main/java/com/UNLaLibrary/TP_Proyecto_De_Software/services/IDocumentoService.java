@@ -13,4 +13,6 @@ public interface IDocumentoService {
     public void agregarDocumento(DocumentoModel documentoModel, MultipartFile archivoPDF) throws NoSuchAlgorithmException, IOException;
     public List<DocumentoModel> traerDocumentos();
     public InputStream descargarDocumento(long id) throws IOException;
+    public List<DocumentoModel> traerDocumentosPorDepartamento();
+    
 }

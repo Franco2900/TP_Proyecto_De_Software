@@ -29,6 +29,7 @@ public class DocumentoService implements IDocumentoService{
     @Autowired
     private IDocumentoRepository documentoRepository;
     private final Path docStorageLocation;
+    private DocumentoConverter documentoConverter;
 
     @Autowired
     public DocumentoService(DocumentoStorageProperty documentoStorageProperty) throws IOException {
@@ -73,4 +74,18 @@ public class DocumentoService implements IDocumentoService{
 
         return is;
     }
+    
+    
+    
+    public List<DocumentoModel> traerDocumentosPorDepartamento(){
+    	List<DocumentoModel> listaDocumentosFiltradosPorDepartamento = new ArrayList<DocumentoModel>();
+    	
+	    for(Documento documento: documentoRepository.findAll()) {
+				listaDocumentosFiltradosPorDepartamento.add(documentoConverter.entityToModel(documento) );
+		}
+	    
+	    return listaDocumentosFiltradosPorDepartamento;
+    }
+    
+    
 }
