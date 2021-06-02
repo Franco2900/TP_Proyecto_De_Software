@@ -26,6 +26,17 @@
           </div>
         </div>
       </div>
+      
+      <div>
+	Ir al listado de: <p>
+	<a th:href="@{/listadoDepartamentos}"> Departamentos </a> <p>
+	<a th:href="@{/listadoCarreras}"> Carreras </a> <p>
+	<a th:href="@{/listadoMaterias}"> Materias </a> <p>
+	<a th:href="@{/listadoDocumentos}"> Todos los documentos </a> <p>
+	</div>
+	
+	Filtrar por:
+	<a th:href="@{/listadoDepartamentos/} + ${departamento} + @{/materias}"> Materia </a>
 
       <footer th:replace="fragments/footer :: footer"> </footer>
    </body>

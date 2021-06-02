@@ -19,7 +19,7 @@ public class ListadoMateriasController {
 	private IDocumentoService documentoService;
 
 	@GetMapping("/listadoMaterias") 
-	public ModelAndView navegarMaterias() { //Para ver todas las materias de todas los departamentos
+	public ModelAndView navegarMaterias(@RequestParam (defaultValue="Todos los departamentos", name="departamento") String departamento) { //Para ver todas las materias de todas los departamentos
 		ModelAndView model = new ModelAndView("listadoMaterias");	
 		List<DocumentoModel> listaMaterias = new ArrayList<DocumentoModel>();
 		
@@ -40,6 +40,7 @@ public class ListadoMateriasController {
 		}
 		
 		model.addObject("listaMaterias", listaMaterias);
+		model.addObject("departamento", departamento);
 		return model;
 	}
 	
