@@ -39,16 +39,16 @@ public class UserController {
 		return "redirect:/listadoDepartamentos";
 	}
 
-	@GetMapping("/registro")
-	public String registro(Model model, @RequestParam(name="error", required=false) String error){
-		model.addAttribute("error", error);
+	@GetMapping("/registro") // Agrega un usuario vacio para el formulario
+	public String registro(Model model){
 		model.addAttribute("userModel", new UserModel());
 		return "user/registro";
 	}
 
-	@PostMapping("/registro")
+	@PostMapping("/registro") // Valida que todos los datos sean correctos
 	public String registro(Model model, @Valid UserModel userModel, BindingResult bindingResult,
 							@RequestParam("confirmPassword") String confirmPassword){
+		// Revisa si hay un campo nulo y vuelve al registro
 		if(bindingResult.hasErrors()){
             model.addAttribute("userModel", userModel);
             return "user/registro";
@@ -56,17 +56,20 @@ public class UserController {
 
 		try{
 			userService.registro(userModel);
-		}
+		} 
+		// Error si ya existe el nombre de usuario
 		catch (UsernameAlreadyExistException e){
 			bindingResult.rejectValue("username", "userModel.username","Ya existe una cuenta con este usuario.");
 			model.addAttribute("userModel", userModel);
 			return "user/registro";
-		}
+		} 
+		// Error si el email ya esta en uso
 		catch (EmailAlreadyExistException e){
 			bindingResult.rejectValue("email", "userModel.email","Ya existe una cuenta con este email.");
 			model.addAttribute("userModel", userModel);
 			return "user/registro";
 		}
+		// Chequea que las contraseñas sean iguales
 		if(!userModel.getPassword().equals(confirmPassword)){
 			bindingResult.rejectValue("password", "userModel.password", "Las contraseñas no coinciden");
 			model.addAttribute("userModel", userModel);

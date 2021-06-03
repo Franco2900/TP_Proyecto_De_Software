@@ -64,17 +64,21 @@ public class UserService implements UserDetailsService, IUserService {
 	}
 	
 	public void registro(UserModel userModel) throws UsernameAlreadyExistException, EmailAlreadyExistException{
+		// Los usuarios que se registran son alumnos, los profesores son precargados por el admin
 		UserRoleModel userRoleModel = userRoleService.getByUserRole("ROLE_ALUMNO");
+		// Si no agrego el rol antes falla el converter
 		userModel.setUserRole(userRoleModel);
 		userModel.setEnabled(true);
 
 		User user = userConverter.modelToEntity(userModel);
+		// Tira error si ya existe nombre de usuario o mail
 		if(checkIfUsernameExists(user.getUsername())){
 			throw new UsernameAlreadyExistException("Ese nombre de usuario no esta disponible");
 		}
 		if(checkIfEmailExists(user.getEmail())){
 			throw new EmailAlreadyExistException("Ese email no esta disponible");
 		}
+		// Encrypto la contraseña
 		BCryptPasswordEncoder pe = new BCryptPasswordEncoder();
 		user.setPassword(pe.encode(user.getPassword()));
 

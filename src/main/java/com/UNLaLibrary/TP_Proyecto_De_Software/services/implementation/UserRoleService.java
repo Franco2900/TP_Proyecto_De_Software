@@ -74,6 +74,7 @@ public class UserRoleService implements UserDetailsService{
 		return null;
 	}
 	
+	// Trae el rol por nombre, nose si es la mejor forma
 	public UserRoleModel getByUserRole(String userRole){
 		List<UserRole> role = userRoleRepository.findByRole(userRole);
 		if(role.isEmpty()){
