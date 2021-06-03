@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller; //Para indicar que esta clase es un Controller
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping; //Para indicar la ruta (también llamado URL) por la cual se va a llamar a este controller y sus metodos. EJ: http:/wikipedia/inicio
 import org.springframework.web.servlet.ModelAndView; //Para poder usar mezclar las vistas html con los modelos
 
@@ -25,185 +26,36 @@ public class NavegacionController {
 	@Autowired
 	private IDocumentoService documentoService;
 	
-	
-	@GetMapping("/listadoDepartamentos/Desarrollo Productivo y Tecnológico") //Para ver los documentos del departamento Desarrollo Productivo y Tecnológico
-	public ModelAndView Productivo_Tecnologico() {
+	@GetMapping("/listadoDepartamentos/{departamento}") //Para ver los documentos del departamento
+	public ModelAndView mostrarDepartamento(@PathVariable("departamento") String departamento) {
 		ModelAndView model = new ModelAndView("listadoDocumentos");
+		List<DocumentoModel> listaDocumentosPorDepartamento = documentoService.traerDocumentosPorDepartamento(departamento);
 		
-		List<DocumentoModel> listaDocumentosFiltrados = documentoService.traerDocumentosPorDepartamento("Desarrollo Productivo y Tecnológico");
-		
-		model.addObject("ListaDocumentos", listaDocumentosFiltrados);
-		model.addObject("departamento", "Desarrollo Productivo y Tecnológico");
+		model.addObject("ListaDocumentos", listaDocumentosPorDepartamento);
+		model.addObject("departamento", departamento);
 		return model;
 	}
 	
 	
-	
-	@GetMapping("/listadoDepartamentos/Desarrollo Productivo y Tecnológico/materias") //Para ver las materias del departamento Desarrollo Productivo y Tecnológico
-	public ModelAndView Productivo_TecnologicoFiltroMaterias() {
+	@GetMapping("/listadoDepartamentos/{departamento}/materias") //Para ver las materias del departamento
+	public ModelAndView mostrarMateriasDelDepartamento(@PathVariable("departamento") String departamento) {
 		ModelAndView model = new ModelAndView("listadoMaterias");
-		List<DocumentoModel> listaMaterias = new ArrayList<DocumentoModel>();
+		List<DocumentoModel> listaMateriasPorDepartamento = documentoService.traerDocumentosPorDepartamento(departamento);
 		
-		for(DocumentoModel documento: documentoService.traerDocumentos() ) { //Recorro la lista de documentos
-			
-			if(listaMaterias.isEmpty() && documento.getDepartamento().equals("Desarrollo Productivo y Tecnológico") ) listaMaterias.add(documento); //En la primera vuelta listaMaterias siempre va a estar vacio así que le añado una materia
-			boolean bandera = false; 								   //bandera para saber si una materia se repite o no
-			
-			for(DocumentoModel doc: listaMaterias) { 				  //Recorro la listaMaterias para chequear si ya esta la materia o no en la lista
-				if(documento.getMateria().equals(doc.getMateria()) ){ //Si ya esta la materia en listaMaterias dejo de chequear 
-					bandera = true;
-					break;
-				}
-			}
-			
-			if(bandera == false && documento.getDepartamento().equals("Desarrollo Productivo y Tecnológico")) listaMaterias.add(documento);
-		}
-
-		
-		model.addObject("listaMaterias", listaMaterias);
-		model.addObject("departamento", "Desarrollo Productivo y Tecnológico");
-		return model;
-	}
-	
-/**************************************************************************************************************************/	
-	
-	@GetMapping("/listadoDepartamentos/Humanidades y Artes") //Para ver los documentos del departamento Humanidades y Artes
-	public ModelAndView Humanidades_Artes() {
-		ModelAndView model = new ModelAndView("listadoDocumentos");
-		
-		List<DocumentoModel> listaDocumentosFiltrados = new ArrayList<DocumentoModel>();
-		
-		for(DocumentoModel documento: documentoService.traerDocumentos() ) {
-			if(documento.getDepartamento().equals("Humanidades y Artes") ) {
-				listaDocumentosFiltrados.add(documento);
-			}
-		}
-		
-		model.addObject("ListaDocumentos", listaDocumentosFiltrados);
-		model.addObject("departamento", "Humanidades y Artes");
+		model.addObject("listaMaterias", listaMateriasPorDepartamento);
+		model.addObject("departamento", departamento);
 		return model;
 	}
 
 	
-	@GetMapping("/listadoDepartamentos/Humanidades y Artes/materias") //Para ver las materias del departamento Humanidades y Artes
-	public ModelAndView HumanidadesFiltroMaterias() {
-		ModelAndView model = new ModelAndView("listadoMaterias");
-		List<DocumentoModel> listaMaterias = new ArrayList<DocumentoModel>();
+	@GetMapping("/listadoDepartamentos/{departamento}/carreras") //Para ver las carreras del departamento
+	public ModelAndView mostrarCarrerasDelDepartamento(@PathVariable("departamento") String departamento) {
+		ModelAndView model = new ModelAndView("listadoCarreras");
+		List<DocumentoModel> listaCarrerasPorDepartamento = documentoService.traerDocumentosPorDepartamento(departamento);
 		
-		for(DocumentoModel documento: documentoService.traerDocumentos() ) { //Recorro la lista de documentos
-			
-			if(listaMaterias.isEmpty() && documento.getDepartamento().equals("Humanidades y Artes") ) listaMaterias.add(documento); //En la primera vuelta listaMaterias siempre va a estar vacio así que le añado una materia
-			boolean bandera = false; 								   //bandera para saber si una materia se repite o no
-			
-			for(DocumentoModel doc: listaMaterias) { 				  //Recorro la listaMaterias para chequear si ya esta la materia o no en la lista
-				if(documento.getMateria().equals(doc.getMateria()) ){ //Si ya esta la materia en listaMaterias dejo de chequear 
-					bandera = true;
-					break;
-				}
-			}
-			
-			if(bandera == false && documento.getDepartamento().equals("Humanidades y Artes")) listaMaterias.add(documento);
-		}
-
-		
-		model.addObject("listaMaterias", listaMaterias);
-		model.addObject("departamento", "Humanidades y Artes");
+		model.addObject("listaCarreras", listaCarrerasPorDepartamento);
+		model.addObject("departamento", departamento);
 		return model;
 	}
-	
-	
-/**************************************************************************************************************************/	
-
-	@GetMapping("/listadoDepartamentos/Planificación y Políticas Públicas") //Para ver los documentos del departamento Planificación y Políticas Públicas
-	public ModelAndView Politicas_Publicas() {
-		ModelAndView model = new ModelAndView("listadoDocumentos");
-		
-		List<DocumentoModel> listaDocumentosFiltrados = new ArrayList<DocumentoModel>();
-		
-		for(DocumentoModel documento: documentoService.traerDocumentos() ) {
-			if(documento.getDepartamento().equals("Planificación y Políticas Públicas") ) {
-				listaDocumentosFiltrados.add(documento);
-			}
-		}
-		
-		model.addObject("ListaDocumentos", listaDocumentosFiltrados);
-		model.addObject("departamento", "Planificación y Políticas Públicas");
-		return model;
-	}
-
-	
-	@GetMapping("/listadoDepartamentos/Planificación y Políticas Públicas/materias") //Para ver las materias del departamento Planificación y Políticas Públicas
-	public ModelAndView PoliticasFiltroMaterias() {
-		ModelAndView model = new ModelAndView("listadoMaterias");
-		List<DocumentoModel> listaMaterias = new ArrayList<DocumentoModel>();
-		
-		for(DocumentoModel documento: documentoService.traerDocumentos() ) { //Recorro la lista de documentos
-			
-			if(listaMaterias.isEmpty() && documento.getDepartamento().equals("Planificación y Políticas Públicas") ) listaMaterias.add(documento); //En la primera vuelta listaMaterias siempre va a estar vacio así que le añado una materia
-			boolean bandera = false; 								   //bandera para saber si una materia se repite o no
-			
-			for(DocumentoModel doc: listaMaterias) { 				  //Recorro la listaMaterias para chequear si ya esta la materia o no en la lista
-				if(documento.getMateria().equals(doc.getMateria()) ){ //Si ya esta la materia en listaMaterias dejo de chequear 
-					bandera = true;
-					break;
-				}
-			}
-			
-			if(bandera == false && documento.getDepartamento().equals("Planificación y Políticas Públicas")) listaMaterias.add(documento);
-		}
-
-		
-		model.addObject("listaMaterias", listaMaterias);
-		model.addObject("departamento", "Planificación y Políticas Públicas");
-		return model;
-	}
-	
-	
-/**************************************************************************************************************************/	
-	
-	@GetMapping("/listadoDepartamentos/Salud Comunitaria") //Para ver los documentos del departamento Salud Comunitaria
-	public ModelAndView Salud() {
-		ModelAndView model = new ModelAndView("listadoDocumentos");
-		
-		List<DocumentoModel> listaDocumentosFiltrados = new ArrayList<DocumentoModel>();
-		
-		for(DocumentoModel documento: documentoService.traerDocumentos() ) {
-			if(documento.getDepartamento().equals("Salud Comunitaria") ) {
-				listaDocumentosFiltrados.add(documento);
-			}
-		}
-		
-		model.addObject("ListaDocumentos", listaDocumentosFiltrados);
-		model.addObject("departamento", "Salud Comunitaria");
-		return model;
-	}
-	
-	
-	@GetMapping("/listadoDepartamentos/Salud Comunitaria/materias") //Para ver las materias del departamento Salud Comunitaria
-	public ModelAndView SaludFiltroMaterias() {
-		ModelAndView model = new ModelAndView("listadoMaterias");
-		List<DocumentoModel> listaMaterias = new ArrayList<DocumentoModel>();
-		
-		for(DocumentoModel documento: documentoService.traerDocumentos() ) { //Recorro la lista de documentos
-			
-			if(listaMaterias.isEmpty() && documento.getDepartamento().equals("Salud Comunitaria") ) listaMaterias.add(documento); //En la primera vuelta listaMaterias siempre va a estar vacio así que le añado una materia
-			boolean bandera = false; 								   //bandera para saber si una materia se repite o no
-			
-			for(DocumentoModel doc: listaMaterias) { 				  //Recorro la listaMaterias para chequear si ya esta la materia o no en la lista
-				if(documento.getMateria().equals(doc.getMateria()) ){ //Si ya esta la materia en listaMaterias dejo de chequear 
-					bandera = true;
-					break;
-				}
-			}
-			
-			if(bandera == false && documento.getDepartamento().equals("Salud Comunitaria")) listaMaterias.add(documento);
-		}
-
-		
-		model.addObject("listaMaterias", listaMaterias);
-		model.addObject("departamento", "Salud Comunitaria");
-		return model;
-	}
-	
 	
 }
