@@ -74,6 +74,13 @@ public class UserRoleService implements UserDetailsService{
 		return null;
 	}
 	
-	
+	public UserRoleModel getByUserRole(String userRole){
+		List<UserRole> role = userRoleRepository.findByRole(userRole);
+		if(role.isEmpty()){
+			return null;
+		}
+		UserRoleModel userRoleModel = userRoleConverter.entityToModel(role.get(0));
+		return userRoleModel;
+	}
 	
 }
