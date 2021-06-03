@@ -14,5 +14,7 @@ public interface IDocumentoService {
     public List<DocumentoModel> traerDocumentos();
     public InputStream descargarDocumento(long id) throws IOException;
     public List<DocumentoModel> traerDocumentosPorDepartamento(String dep);
+    public List<DocumentoModel> traerDocumentosPorCarrera(String carrera);
+    public List<DocumentoModel> traerDocumentosPorMateria(String materia);
     
 }

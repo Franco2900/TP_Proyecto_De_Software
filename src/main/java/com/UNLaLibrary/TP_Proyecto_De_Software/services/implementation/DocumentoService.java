@@ -87,6 +87,24 @@ public class DocumentoService implements IDocumentoService{
 	    
 	    return listaDocumentosFiltradosPorDepartamento;
     }
-    
+    public List<DocumentoModel> traerDocumentosPorCarrera(String carrera){
+    	List<DocumentoModel> listaDocumentosXCarrera = new ArrayList<DocumentoModel>();
+
+    	for(Documento documento: documentoRepository.findCarrera(carrera)) {
+    		listaDocumentosXCarrera.add(documentoConverter.entityToModel(documento) );
+    	}
+
+    	return listaDocumentosXCarrera;
+    };
+    public List<DocumentoModel> traerDocumentosPorMateria(String materia){
+    	List<DocumentoModel> listaDocumentosXMaterias = new ArrayList<DocumentoModel>();
+
+    	for(Documento documento: documentoRepository.findMateria(materia)) {
+    		listaDocumentosXMaterias.add(documentoConverter.entityToModel(documento) );
+    	}
+
+    	return listaDocumentosXMaterias;
+    };
+
     
 }
