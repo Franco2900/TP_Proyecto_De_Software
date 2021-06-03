@@ -21,23 +21,7 @@ public class ListadoCarrerasController {
 	@GetMapping("/listadoCarreras") 
 	public ModelAndView navegarCarreras(@RequestParam (defaultValue="Todos los departamentos", name="departamento") String departamento) { //Para ver todas las carreras de todas los departamentos
 		ModelAndView model = new ModelAndView("listadoCarreras");	
-		List<DocumentoModel> listaCarreras = new ArrayList<DocumentoModel>();
-		listaCarreras = documentoService.traerDocumentos();
-		//Recorro la lista de documentos y añado a la listaCarreras un solo documento por carrera. Despues en la vista uso esos documentos para sacar el nombre de la carrera
-		for(DocumentoModel documento: documentoService.traerDocumentos() ) { //Recorro la lista de documentos
-			
-			if(listaCarreras.isEmpty() ) listaCarreras.add(documento); //En la primera vuelta listaCarreras siempre va a estar vacio así que le añado una carrera
-			boolean bandera = false; 								   //bandera para saber si una carrera se repite o no
-			
-			for(DocumentoModel doc: listaCarreras) { 				  //Recorro la listaCarreras para chequear si ya esta la carrera o no en la lista
-				if(documento.getCarrera().equals(doc.getCarrera()) ){ //Si ya esta la carrera en listaCarrera dejo de chequear 
-					bandera = true;
-					break;
-				}
-			}
-			
-			if(bandera == false) listaCarreras.add(documento);
-		}
+		List<String> listaCarreras = documentoService.traerCarreras();
 		
 		model.addObject("listaCarreras", listaCarreras);
 		model.addObject("departamento", departamento);

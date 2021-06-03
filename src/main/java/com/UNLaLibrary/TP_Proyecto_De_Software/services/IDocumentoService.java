@@ -16,5 +16,6 @@ public interface IDocumentoService {
     public List<DocumentoModel> traerDocumentosPorDepartamento(String dep);
     public List<DocumentoModel> traerDocumentosPorCarrera(String carrera);
     public List<DocumentoModel> traerDocumentosPorMateria(String materia);
-    
+    public List<String> traerMaterias();
+    public List<String> traerCarreras();
 }

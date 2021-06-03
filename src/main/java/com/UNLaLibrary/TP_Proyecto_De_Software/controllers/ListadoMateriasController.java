@@ -21,23 +21,7 @@ public class ListadoMateriasController {
 	@GetMapping("/listadoMaterias") 
 	public ModelAndView navegarMaterias(@RequestParam (defaultValue="Todos los departamentos", name="departamento") String departamento) { //Para ver todas las materias de todas los departamentos
 		ModelAndView model = new ModelAndView("listadoMaterias");	
-		List<DocumentoModel> listaMaterias = new ArrayList<DocumentoModel>();
-		
-		//Recorro la lista de documentos y añado a la listaMaterias un solo documento por materia. Despues en la vista uso esos documentos para sacar el nombre de la materia
-		for(DocumentoModel documento: documentoService.traerDocumentos() ) { //Recorro la lista de documentos
-			
-			if(listaMaterias.isEmpty() ) listaMaterias.add(documento); //En la primera vuelta listaMaterias siempre va a estar vacio así que le añado una materia
-			boolean bandera = false; 								   //bandera para saber si una materia se repite o no
-			
-			for(DocumentoModel doc: listaMaterias) { 				  //Recorro la listaMaterias para chequear si ya esta la materia o no en la lista
-				if(documento.getMateria().equals(doc.getMateria()) ){ //Si ya esta la materia en listaMaterias dejo de chequear 
-					bandera = true;
-					break;
-				}
-			}
-			
-			if(bandera == false) listaMaterias.add(documento);
-		}
+		List<String> listaMaterias = documentoService.traerMaterias();
 		
 		model.addObject("listaMaterias", listaMaterias);
 		model.addObject("departamento", departamento);

@@ -11,13 +11,16 @@ import com.UNLaLibrary.TP_Proyecto_De_Software.entities.Documento;
 @Repository
 public interface IDocumentoRepository extends JpaRepository<Documento, Long>{
     
-	@Query("FROM Documento WHERE departamento=(:departamento)")
+	@Query("FROM Documento order by materia asc ")
+	public abstract List<Documento> findTodo();
+	
+	@Query("FROM Documento WHERE departamento=(:departamento) ")
     public abstract List<Documento> findDepartamento(String departamento);
 	
 	@Query("FROM Documento WHERE departamento=(:carrera)")
     public abstract List<Documento> findCarrera(String carrera);
 	
-	@Query("FROM Documento WHERE departamento=(:materia)")
+	@Query("FROM Documento WHERE departamento=(:materia) ")
     public abstract List<Documento> findMateria(String materia);
 	
 }

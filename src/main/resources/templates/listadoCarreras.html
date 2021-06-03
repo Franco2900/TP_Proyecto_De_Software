@@ -16,10 +16,10 @@
         <div class="col-md-4 mb-5">
           <div class="card h-100">                  
             <div class="card-body">
-              <h2 th:text="${carrera.carrera}" class="card-title">Materia</h2>
+              <h2 th:text="${carrera}" class="card-title">Carrera</h2>
             </div>
             <div class="card-footer">
-              <a class="btn btn-outline-primary btn-sm" th:href="@{/listadoCarreras/carrera?carrera=} + ${carrera.carrera}">Ver documento</a>
+              <a class="btn btn-outline-primary btn-sm" th:href="@{/listadoCarreras/} + ${carrera}">Ver documento</a>
             </div>
           </div>
         </div>

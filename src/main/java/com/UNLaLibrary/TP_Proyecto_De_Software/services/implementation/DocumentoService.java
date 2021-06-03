@@ -17,6 +17,7 @@ import java.security.NoSuchAlgorithmException;
 import java.util.List;
 import java.util.Optional;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -58,7 +59,7 @@ public class DocumentoService implements IDocumentoService{
     // Devuelve todos los documentos sin filtrar
     public List<DocumentoModel> traerDocumentos(){
         List<DocumentoModel> documentoModels = new ArrayList<DocumentoModel>();
-        List<Documento> documentos = documentoRepository.findAll();
+        List<Documento> documentos = documentoRepository.findTodo();
         DocumentoConverter documentoConverter = new DocumentoConverter();
 
         for(Documento d:documentos){
@@ -105,6 +106,59 @@ public class DocumentoService implements IDocumentoService{
 
     	return listaDocumentosXMaterias;
     };
+    public List<String> traerMaterias(){
+    	List <String> lista = new ArrayList<String>();
+//    	Iterator<DocumentoModel> docs = traerDocumentos().iterator();
+//    	while (docs.next() != null) {
+//			if(docs.getClass().g)
+//			
+//		}
+    	
+    	
+    	//Recorro la lista de documentos y añado a la listaCarreras un solo documento por carrera. Despues en la vista uso esos documentos para sacar el nombre de la carrera
+    			for(DocumentoModel documento: traerDocumentos() ) { //Recorro la lista de documentos
+    				
+    				if(lista.isEmpty() ) lista.add(documento.getMateria()); //En la primera vuelta listaCarreras siempre va a estar vacio así que le añado una carrera
+    				boolean bandera = false; 								   //bandera para saber si una carrera se repite o no
+    				
+    				for(String s: lista) { 				  //Recorro la listaCarreras para chequear si ya esta la carrera o no en la lista
+    					if(documento.getMateria().equals(s) ){ //Si ya esta la carrera en listaCarrera dejo de chequear 
+    						bandera = true;
+    						break;
+    					}
+    				}
+    				
+    				if(bandera == false) lista.add(documento.getMateria());
+    			}
+    	return lista;
+    }
+    
+    public List<String> traerCarreras(){
+    	List <String> lista = new ArrayList<String>();
+//    	Iterator<DocumentoModel> docs = traerDocumentos().iterator();
+//    	while (docs.next() != null) {
+//			if(docs.getClass().g)
+//			
+//		}
+    	
+    	
+    	//Recorro la lista de documentos y añado a la listaCarreras un solo documento por carrera. Despues en la vista uso esos documentos para sacar el nombre de la carrera
+    			for(DocumentoModel documento: traerDocumentos() ) { //Recorro la lista de documentos
+    				
+    				if(lista.isEmpty() ) lista.add(documento.getCarrera()); //En la primera vuelta listaCarreras siempre va a estar vacio así que le añado una carrera
+    				boolean bandera = false; 								   //bandera para saber si una carrera se repite o no
+    				
+    				for(String s: lista) { 				  //Recorro la listaCarreras para chequear si ya esta la carrera o no en la lista
+    					if(documento.getCarrera().equals(s) ){ //Si ya esta la carrera en listaCarrera dejo de chequear 
+    						bandera = true;
+    						break;
+    					}
+    				}
+    				
+    				if(bandera == false) lista.add(documento.getCarrera());
+    			}
+    	return lista;
+    }
 
     
 }
