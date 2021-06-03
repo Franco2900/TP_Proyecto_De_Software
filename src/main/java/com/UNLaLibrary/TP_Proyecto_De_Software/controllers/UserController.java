@@ -36,7 +36,7 @@ public class UserController {
 	
 	@GetMapping("/loginsuccess")
 	public String loginCheck() {
-		return "redirect:/agregarDocumento";
+		return "redirect:/listadoDepartamentos";
 	}
 
 	@GetMapping("/registro")
@@ -73,6 +73,11 @@ public class UserController {
 			return "user/registro";
 		}
 
-		return "redirect:/";
+		return "redirect:/registrosuccess";
+	}
+
+	@GetMapping("/registrosuccess")
+	public String registroCheck() {
+		return "user/registrosuccess";
 	}
 }
