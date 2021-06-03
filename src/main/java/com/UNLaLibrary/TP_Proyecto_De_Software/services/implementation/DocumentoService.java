@@ -29,6 +29,7 @@ public class DocumentoService implements IDocumentoService{
     @Autowired
     private IDocumentoRepository documentoRepository;
     private final Path docStorageLocation;
+    @Autowired
     private DocumentoConverter documentoConverter;
 
     @Autowired
@@ -77,10 +78,10 @@ public class DocumentoService implements IDocumentoService{
     
     
     
-    public List<DocumentoModel> traerDocumentosPorDepartamento(){
+    public List<DocumentoModel> traerDocumentosPorDepartamento(String dep){
     	List<DocumentoModel> listaDocumentosFiltradosPorDepartamento = new ArrayList<DocumentoModel>();
     	
-	    for(Documento documento: documentoRepository.findAll()) {
+	    for(Documento documento: documentoRepository.findDepartamento(dep)) {
 				listaDocumentosFiltradosPorDepartamento.add(documentoConverter.entityToModel(documento) );
 		}
 	    

@@ -11,7 +11,7 @@ import com.UNLaLibrary.TP_Proyecto_De_Software.entities.Documento;
 @Repository
 public interface IDocumentoRepository extends JpaRepository<Documento, Long>{
     
-	//@Query("FROM Documento WHERE departamento='(:departamento)'")
-    public abstract List<Documento> findAll();
+	@Query("FROM Documento WHERE departamento=(:departamento)")
+    public abstract List<Documento> findDepartamento(String departamento);
 	
 }

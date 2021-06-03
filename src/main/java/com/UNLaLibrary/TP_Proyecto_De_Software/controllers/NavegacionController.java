@@ -30,7 +30,7 @@ public class NavegacionController {
 	public ModelAndView Productivo_Tecnologico() {
 		ModelAndView model = new ModelAndView("listadoDocumentos");
 		
-		List<DocumentoModel> listaDocumentosFiltrados = documentoService.traerDocumentosPorDepartamento();
+		List<DocumentoModel> listaDocumentosFiltrados = documentoService.traerDocumentosPorDepartamento("Desarrollo Productivo y Tecnológico");
 		
 		model.addObject("ListaDocumentos", listaDocumentosFiltrados);
 		model.addObject("departamento", "Desarrollo Productivo y Tecnológico");

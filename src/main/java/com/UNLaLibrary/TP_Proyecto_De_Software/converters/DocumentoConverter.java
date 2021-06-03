@@ -1,8 +1,11 @@
 package com.UNLaLibrary.TP_Proyecto_De_Software.converters;
 
+import org.springframework.stereotype.Component;
+
 import com.UNLaLibrary.TP_Proyecto_De_Software.entities.Documento;
 import com.UNLaLibrary.TP_Proyecto_De_Software.models.DocumentoModel;
 
+@Component
 public class DocumentoConverter {
 
 	//De entidad a modelo
