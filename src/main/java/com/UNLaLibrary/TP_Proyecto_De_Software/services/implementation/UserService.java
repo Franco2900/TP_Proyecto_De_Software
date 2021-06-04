@@ -9,21 +9,24 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.UNLaLibrary.TP_Proyecto_De_Software.converters.UserConverter;
 import com.UNLaLibrary.TP_Proyecto_De_Software.entities.UserRole;
+import com.UNLaLibrary.TP_Proyecto_De_Software.exceptions.EmailAlreadyExistException;
+import com.UNLaLibrary.TP_Proyecto_De_Software.exceptions.UsernameAlreadyExistException;
+import com.UNLaLibrary.TP_Proyecto_De_Software.entities.User;
 import com.UNLaLibrary.TP_Proyecto_De_Software.models.UserModel;
+import com.UNLaLibrary.TP_Proyecto_De_Software.models.UserRoleModel;
 import com.UNLaLibrary.TP_Proyecto_De_Software.repositories.IUserRepository;
+import com.UNLaLibrary.TP_Proyecto_De_Software.services.IUserService;
 
-
-
-@Service("userService")
-public class UserService implements UserDetailsService {
+@Service
+public class UserService implements UserDetailsService, IUserService {
 
 	@Autowired
 	@Qualifier("userRepository")
@@ -32,16 +35,19 @@ public class UserService implements UserDetailsService {
 	@Autowired
 	@Qualifier("userConverter")
 	private UserConverter userConverter;
+
+	@Autowired
+	private UserRoleService userRoleService;
 	
 	
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		com.UNLaLibrary.TP_Proyecto_De_Software.entities.User user = userRepository.findByUsernameAndFetchUserRolesEagerly(username);
+		User user = userRepository.findByUsernameAndFetchUserRolesEagerly(username);
 		return (UserDetails) buildUser(user, buildGrantedAuthorities(user.getUserRole()));
 	}
 	
-	private User buildUser(com.UNLaLibrary.TP_Proyecto_De_Software.entities.User user, List<GrantedAuthority> grantedAuthorities) {
-		return new User(user.getUsername(), user.getPassword(), user.isEnabled(),
+	private org.springframework.security.core.userdetails.User buildUser(User user, List<GrantedAuthority> grantedAuthorities) {
+		return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), user.isEnabled(),
 						true, true, true, 
 						grantedAuthorities);
 	}
@@ -57,19 +63,43 @@ public class UserService implements UserDetailsService {
 		return new SimpleGrantedAuthority(userRole2.getRole());
 	}
 	
-	public com.UNLaLibrary.TP_Proyecto_De_Software.entities.User save(com.UNLaLibrary.TP_Proyecto_De_Software.entities.User user) {	
-		return userRepository.save(user);
+	public void registro(UserModel userModel) throws UsernameAlreadyExistException, EmailAlreadyExistException{
+		// Los usuarios que se registran son alumnos, los profesores son precargados por el admin
+		UserRoleModel userRoleModel = userRoleService.getByUserRole("ROLE_ALUMNO");
+		// Si no agrego el rol antes falla el converter
+		userModel.setUserRole(userRoleModel);
+		userModel.setEnabled(true);
+
+		User user = userConverter.modelToEntity(userModel);
+		// Tira error si ya existe nombre de usuario o mail
+		if(checkIfUsernameExists(user.getUsername())){
+			throw new UsernameAlreadyExistException("Ese nombre de usuario no esta disponible");
+		}
+		if(checkIfEmailExists(user.getEmail())){
+			throw new EmailAlreadyExistException("Ese email no esta disponible");
+		}
+		// Encrypto la contraseña
+		BCryptPasswordEncoder pe = new BCryptPasswordEncoder();
+		user.setPassword(pe.encode(user.getPassword()));
+
+		userRepository.save(user);
 	}
 	
 	public List<UserModel> getAll(){ 
 		List<UserModel> usuarios = new ArrayList<>();
-		for (com.UNLaLibrary.TP_Proyecto_De_Software.entities.User u: userRepository.findAll()) {
+		for (User u: userRepository.findAll()) {
 			usuarios.add(userConverter.entityToModel(u));
 		}
 		return usuarios;
 	}
 	
-	
+	public boolean checkIfUsernameExists(String username){
+		return null != userRepository.findByUsernameAndFetchUserRolesEagerly(username);
+	}
+
+	public boolean checkIfEmailExists(String email){
+		return null != userRepository.findByEmail(email);
+	}
 	
 	/* no pude probar esto
 	public boolean existe(com.UNLaLibrary.TP_Proyecto_De_Software.entities.User user) {

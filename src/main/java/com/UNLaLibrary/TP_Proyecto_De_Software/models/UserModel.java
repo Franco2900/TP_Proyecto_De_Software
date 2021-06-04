@@ -1,9 +1,18 @@
 package com.UNLaLibrary.TP_Proyecto_De_Software.models;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
+
 public class UserModel {
 	private int id;
+	@NotEmpty(message = "El campo Email no puede estar vacio")
+	@Email(message = "El email ingreso no es valido")
 	private String email;
+	@NotEmpty(message = "El campo Username no puede estar vacio")
 	private String username;
+	@NotEmpty(message = "El campo Password no puede estar vacio")
+	@Size(min = 8, message = "El password debe tener almenos 8 caracteres")
 	private String password;
 	private boolean enabled;
 	private UserRoleModel userRole;
