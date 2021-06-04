@@ -1,12 +1,11 @@
 package com.UNLaLibrary.TP_Proyecto_De_Software.controllers;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.UNLaLibrary.TP_Proyecto_De_Software.models.DocumentoModel;
@@ -19,26 +18,22 @@ public class ListadoCarrerasController {
 	private IDocumentoService documentoService;
 
 	@GetMapping("/listadoCarreras") 
-	public ModelAndView navegarCarreras(@RequestParam (defaultValue="Todos los departamentos", name="departamento") String departamento) { //Para ver todas las carreras de todas los departamentos
+	public ModelAndView navegarCarreras() { //Para ver todas las carreras de todas los departamentos
 		ModelAndView model = new ModelAndView("listadoCarreras");	
 		List<String> listaCarreras = documentoService.traerCarreras();
 		
 		model.addObject("listaCarreras", listaCarreras);
-		model.addObject("departamento", departamento);
+		model.addObject("departamento", "Todos los departamentos");
 		return model;
 	}
 	
 	
-	@GetMapping("listadoCarreras/carrera") //Para ver todos los documentos de una materia
-	public ModelAndView carreraIndividual(@RequestParam String materia) {
+	@GetMapping("listadoCarreras/{carrera}") //Para ver todos los documentos de una materia
+	public ModelAndView carreraIndividual(@PathVariable("carrera") String carrera) {
 		ModelAndView model = new ModelAndView("listadoDocumentos");
-		List<DocumentoModel> listaDocumentosDeLaCarrera = new ArrayList<DocumentoModel>();
+		List<DocumentoModel> listaDocumentosDeLaCarrera = documentoService.traerDocumentosPorCarrera(carrera);
 		
-		for(DocumentoModel documento: documentoService.traerDocumentos() ) {
-			if(documento.getCarrera().equals(materia) ) listaDocumentosDeLaCarrera.add(documento);
-		}
-		
-		model.addObject("ListaDocumentos", listaDocumentosDeLaCarrera);
+		model.addObject("listaDocumentos", listaDocumentosDeLaCarrera);
 		return model;
 	}
 	
