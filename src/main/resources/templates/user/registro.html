@@ -17,23 +17,23 @@
                     <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('*')}">
                         <p th:each="err : ${#fields.errors('*')}" th:text="${err}"></p>
                     </div>
-                    <div class="form-floating mb-3">
+                    <div class="form-floating mb-2">
                         <input th:field="*{username}" th:errorclass="is-invalid" class="form-control" type="text" name="username" id="username" placeholder="Username" required/>
                         <label for="username">Username</label>
                     </div>
-                    <div class="form-floating mb-3">
+                    <div class="form-floating mb-2">
                         <input th:field="*{email}" th:errorclass="is-invalid" class="form-control" type="email" name="email" id="email" placeholder="email" required/>
                         <label for="email">Email</label>
                     </div>
-                    <div class="form-floating mb-3">
+                    <div class="form-floating mb-2">
                         <input th:field="*{password}" th:errorclass="is-invalid" class="form-control" type="password" name="password" id="password" placeholder="Password" required/>
                         <label for="password">Password</label>
                     </div>
-                    <div class="form-floating mb-3">
+                    <div class="form-floating mb-2">
                         <input th:classappend="${#fields.hasErrors('password')} ? is-invalid : ''" class="form-control" type="password" name="confirmPassword" id="confirmPassword" placeholder="Confirm Password" required/>
                         <label for="confirmPassword">Confirm Password</label>
                     </div>
-                    <div class="checkbox mb-3">
+                    <div class="checkbox mb-2">
                         <label><input type="checkbox" value="remember-me" required> Acepto los <a href="#" class="text-decoration-none">Terminos y Condiciones</a></label>
                       </div>
                     <button class="w-100 btn btn-lg btn-primary mb-2" type="submit">Sign up</button>

@@ -30,14 +30,14 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
                 .antMatchers("/", "/listadoDocumentos/**",
                     "/listadoDepartamentos/**", "/listadoMaterias/**", 
                     "/registro", "/registrosuccess").permitAll()
-                .antMatchers("/agregarDocumento/**").hasRole("ADMIN")
+                .antMatchers("/agregarDocumento/**").hasAnyRole("ADMIN", "PROFESOR")
                 .anyRequest().authenticated()
             .and()
                 .formLogin().loginPage("/login").loginProcessingUrl("/loginprocess")
                 .usernameParameter("username").passwordParameter("password")
                 .defaultSuccessUrl("/loginsuccess").permitAll()
             .and()
-                .logout().logoutUrl("/logout").logoutSuccessUrl("/logout").permitAll()
+                .logout().logoutUrl("/logout").logoutSuccessUrl("/login").permitAll()
             .and()
                 .headers().frameOptions().sameOrigin()
             .and().csrf().disable();

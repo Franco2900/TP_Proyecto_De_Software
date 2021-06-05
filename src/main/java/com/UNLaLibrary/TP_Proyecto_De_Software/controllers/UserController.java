@@ -1,5 +1,7 @@
 package com.UNLaLibrary.TP_Proyecto_De_Software.controllers;
 
+import java.security.Principal;
+
 import javax.validation.Valid;
 
 import com.UNLaLibrary.TP_Proyecto_De_Software.exceptions.EmailAlreadyExistException;
@@ -8,6 +10,7 @@ import com.UNLaLibrary.TP_Proyecto_De_Software.models.UserModel;
 import com.UNLaLibrary.TP_Proyecto_De_Software.services.IUserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -21,9 +24,14 @@ public class UserController {
 	private IUserService userService;
 
 	@GetMapping("/login")
-	public String login(Model model,
+	public String login(Model model, Principal principal,
 					@RequestParam(name="error", required=false) String error, 
 					@RequestParam(name="logout", required=false) String logout) {
+		// Checkea si el usuario ya esta logeado y lo manda al inicio
+		if(principal!=null && ((Authentication)principal).isAuthenticated()){
+			return "redirect:/";
+		}
+
 		model.addAttribute("error",error);
 		model.addAttribute("logout",logout);
 		return "user/login";
@@ -40,7 +48,12 @@ public class UserController {
 	}
 
 	@GetMapping("/registro") // Agrega un usuario vacio para el formulario
-	public String registro(Model model){
+	public String registro(Model model, Principal principal){
+		// Checkea si el usuario ya esta logeado y lo manda al inicio
+		if(principal!=null && ((Authentication)principal).isAuthenticated()){
+			return "redirect:/";
+		}
+
 		model.addAttribute("userModel", new UserModel());
 		return "user/registro";
 	}
