@@ -17,36 +17,51 @@ public class NavegacionController {
 	@Autowired
 	private IDocumentoService documentoService;
 	
-	@GetMapping("/listadoDepartamentos/{departamento}") //Para ver los documentos del departamento
-	public ModelAndView mostrarDepartamento(@PathVariable("departamento") String departamento) {
-		ModelAndView model = new ModelAndView("listadoDocumentos");
-		List<DocumentoModel> listaDocumentosPorDepartamento = documentoService.traerDocumentosPorDepartamento(departamento);
+	//@GetMapping("/listadoDepartamentos/{departamento}/carreras/{carrera}/materias/{materia}/documento/{id}") Otra forma
+	
+	@GetMapping("/listadoDepartamentos/{departamento}") //Para ver las carreras del departamento
+	public ModelAndView mostrarCarreras(@PathVariable("departamento") String departamento) {
+		ModelAndView model = new ModelAndView("listadoCarreras");
+		List<DocumentoModel> listaCarreras = documentoService.traerDocumentosPorDepartamento(departamento);
 		
-		model.addObject("listaDocumentos", listaDocumentosPorDepartamento);
+		model.addObject("listaCarreras", listaCarreras);
 		model.addObject("departamento", departamento);
 		return model;
 	}
 	
-	
-	@GetMapping("/listadoDepartamentos/{departamento}/materias") //Para ver las materias del departamento
-	public ModelAndView mostrarMateriasDelDepartamento(@PathVariable("departamento") String departamento) {
-		ModelAndView model = new ModelAndView("listadoDocumentos");
-		List<DocumentoModel> listaMateriasPorDepartamento = documentoService.traerDocumentosPorDepartamento(departamento);
+	@GetMapping("/listadoDepartamentos/{departamento}/{carrera}") //Para ver las materias de la carrera del departamento
+	public ModelAndView mostrarMaterias(@PathVariable ("departamento") String departamento, @PathVariable ("carrera") String carrera) {
+		ModelAndView model = new ModelAndView("listadoMaterias");
+		List<DocumentoModel> listaMaterias = documentoService.traerDepartamentoXCarrera(departamento, carrera);
 		
-		model.addObject("listaDocumentos", listaMateriasPorDepartamento);
+		model.addObject("listaMaterias", listaMaterias);
 		model.addObject("departamento", departamento);
+		model.addObject("carrera", carrera);
 		return model;
 	}
-
 	
-	@GetMapping("/listadoDepartamentos/{departamento}/carreras") //Para ver las carreras del departamento
-	public ModelAndView mostrarCarrerasDelDepartamento(@PathVariable("departamento") String departamento) {
+	
+	@GetMapping("/listadoDepartamentos/{departamento}/{carrera}/{materia}") //Para ver los documentos de una materia de una carrera de un departamento
+	public ModelAndView mostrarDocumentos(@PathVariable ("departamento") String departamento, @PathVariable ("carrera") String carrera, @PathVariable ("materia") String materia) {
 		ModelAndView model = new ModelAndView("listadoDocumentos");
-		List<DocumentoModel> listaCarrerasPorDepartamento = documentoService.traerDocumentosPorDepartamento(departamento);
+		List<DocumentoModel> listadoDocumentos = documentoService.traerDepartamentoXCarreraXMateria(departamento, carrera, materia);
 		
-		model.addObject("listaDocumentos", listaCarrerasPorDepartamento);
+		model.addObject("listaDocumentos", listadoDocumentos);
 		model.addObject("departamento", departamento);
+		model.addObject("carrera", carrera);
+		model.addObject("materia", materia);
 		return model;
 	}
+	
+	
+	@GetMapping("/listadoDepartamentos/{departamento}/{carrera}/{materia}/{id}") //Para ver los documentos de una materia de una carrera de un departamento
+	public ModelAndView mostrarDocumentoIndividual(@PathVariable ("departamento") String departamento, @PathVariable ("carrera") String carrera, @PathVariable ("materia") String materia, @PathVariable ("id") long id) {
+		ModelAndView model = new ModelAndView("documento");
+		DocumentoModel documento = documentoService.traerDocumento(id);
+		
+		model.addObject("documento", documento);
+		return model;
+	}
+	
 	
 }

@@ -10,16 +10,16 @@
       </nav>
 
     <div class="container espaciador">
-      <h2 class="mb-4">Listado de Carreras de <a th:text="${departamento}"> </a> </h2>
+      <h2 class="mb-4">Listado de todas las materias </h2>
 
-       <div th:each="carrera:${listaCarreras}" class="row col gx-4 gx-lg-5">
+       <div th:each="materia:${listaMaterias}" class="row col gx-4 gx-lg-5">
         <div class="col-md-4 mb-5">
           <div class="card h-100">                  
             <div class="card-body">
-              <h2 th:text="${carrera.carrera}" class="card-title">Carrera</h2>
+              <h2 th:text="${materia}" class="card-title">Materia</h2>
             </div>
             <div class="card-footer">
-              <a class="btn btn-outline-primary btn-sm" th:href="@{/listadoDepartamentos/} + ${departamento} + @{/} + ${carrera.carrera}">Ver documento</a>
+            <a class="btn btn-outline-primary btn-sm" th:href="@{/listadoMateriasUniversal} + ${materia}">Ver documento</a> 
             </div>
           </div>
         </div>
@@ -28,8 +28,8 @@
 	<div>
 	Ir al listado de: <p>
 	<a th:href="@{/listadoDepartamentos}"> Departamentos </a> <p>
-	<a th:href="@{/listadoCarreras}"> Carreras </a> <p>
-	<a th:href="@{/listadoMaterias}"> Materias </a> <p>
+	<a th:href="@{/listadoCarreras}"> Todas las Carreras </a> <p>
+	<a th:href="@{/listadoMaterias}"> Todas las Materias </a> <p>
 	<a th:href="@{/listadoDocumentos}"> Todos los documentos </a> <p>
 	</div>
 

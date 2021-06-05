@@ -10,16 +10,16 @@
       </nav>
 
     <div class="container espaciador">
-      <h2 class="mb-4">Listado de Materias de <a th:text="${departamento}"> </a> </h2>
+      <h2 class="mb-4">Listado de Materias de la carrera <a th:text="${carrera}"> </a> del departamento <a th:text="${departamento}"> </a> </h2>
 
        <div th:each="materia:${listaMaterias}" class="row col gx-4 gx-lg-5">
         <div class="col-md-4 mb-5">
           <div class="card h-100">                  
             <div class="card-body">
-              <h2 th:text="${materia}" class="card-title">Materia</h2>
+              <h2 th:text="${materia.materia}" class="card-title">Materia</h2>
             </div>
             <div class="card-footer">
-            <a class="btn btn-outline-primary btn-sm" th:href="@{/listadoMaterias/} + ${materia}">Ver documento</a> 
+            <a class="btn btn-outline-primary btn-sm" th:href="@{/listadoDepartamentos/} + ${departamento} + @{/} + ${carrera} + @{/} + ${materia.materia}" >Ver documento</a> 
             </div>
           </div>
         </div>

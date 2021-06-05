@@ -19,11 +19,10 @@ public class ListadoMateriasController {
 
 	@GetMapping("/listadoMaterias") 
 	public ModelAndView navegarMaterias() { //Para ver todas las materias de todas los departamentos
-		ModelAndView model = new ModelAndView("listadoMaterias");	
+		ModelAndView model = new ModelAndView("listadoMateriasUniversal");	
 		List<String> listaMaterias = documentoService.traerMaterias();
 		
 		model.addObject("listaMaterias", listaMaterias);
-		model.addObject("departamento", "Todos los departamentos");
 		return model;
 	}
 	

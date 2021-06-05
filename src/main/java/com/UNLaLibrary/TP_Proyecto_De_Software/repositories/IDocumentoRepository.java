@@ -20,7 +20,16 @@ public interface IDocumentoRepository extends JpaRepository<Documento, Long>{
 	@Query("FROM Documento WHERE carrera=(:carrera)")
     public abstract List<Documento> findCarrera(String carrera);
 	
+	@Query("FROM Documento WHERE departamento=(:departamento) and carrera=(:carrera)")
+    public abstract List<Documento> findDepartamentoXCarrera(String departamento, String carrera);
+	
+	@Query("FROM Documento WHERE departamento=(:departamento) and carrera=(:carrera) and materia=(:materia)")
+    public abstract List<Documento> findDepartamentoXCarreraXMateria(String departamento, String carrera, String materia);
+	
 	@Query("FROM Documento WHERE materia=(:materia) ")
     public abstract List<Documento> findMateria(String materia);
+
+	@Query("FROM Documento WHERE id=(:id) ")
+	public abstract Documento findDocumento(long id);
 	
 }

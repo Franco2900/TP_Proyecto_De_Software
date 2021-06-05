@@ -16,11 +16,12 @@
           <div class="card h-100">                  
             <div class="card-body">
               <h2 th:text="${documento.titulo}" class="card-title"></h2>
-              <p th:text="${documento.universidad}" class="card-text"> </p>
-              <p th:text="${documento.carrera}" class="card-text"> </p>
-              <p th:text="${documento.materia}" class="card-text"> </p>
-              <p th:text="${documento.profesor}" class="card-text"> </p>
-              <p th:text="${documento.descripcion}" class="card-text"> </p>
+              <p class="card-text"> Universidad: <a th:text="${documento.universidad}"></a> </p>
+              <p class="card-text"> Departamento: <a th:text="${documento.departamento}"></a> </p>
+              <p class="card-text"> Carrera: <a th:text="${documento.carrera}"></a> </p>
+              <p class="card-text"> Materia: <a th:text="${documento.materia}"></a> </p>
+              <p class="card-text"> Profesor: <a th:text="${documento.profesor}"></a> </p>
+              <p class="card-text"> Descripción breve: <a th:text="${documento.descripcion}"></a> </p>
             </div>
             <div class="card-footer">
               <!-- Vista previa del documento -->
