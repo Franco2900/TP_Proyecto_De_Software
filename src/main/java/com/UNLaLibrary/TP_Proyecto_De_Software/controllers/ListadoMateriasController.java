@@ -29,13 +29,21 @@ public class ListadoMateriasController {
 	
 	@GetMapping("listadoMaterias/{materia}") //Para ver todos los documentos de una materia
 	public ModelAndView materiaIndividual(@PathVariable ("materia") String materia) {
-		ModelAndView model = new ModelAndView("listadoDocumentos");
+		ModelAndView model = new ModelAndView("listadoMateriasUniversalXDocumentos");
 		List<DocumentoModel> listaDocumentosDeLaMateria = documentoService.traerDocumentosPorMateria(materia);
 		
 		model.addObject("listaDocumentos", listaDocumentosDeLaMateria);
+		model.addObject("materia", materia);
 		return model;
 	}
 	
-	
+	@GetMapping("listadoMaterias/{materia}/{id}") //Para ver un documento en especifico
+	public ModelAndView documentoIndividual(@PathVariable ("materia") String materia, @PathVariable ("id") long id) {
+		ModelAndView model = new ModelAndView("documento");
+		DocumentoModel documento = documentoService.traerDocumento(id);
+		
+		model.addObject("documento", documento);
+		return model;
+	}
 	
 }

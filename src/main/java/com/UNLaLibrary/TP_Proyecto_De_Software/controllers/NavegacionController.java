@@ -54,7 +54,7 @@ public class NavegacionController {
 	}
 	
 	
-	@GetMapping("/listadoDepartamentos/{departamento}/{carrera}/{materia}/{id}") //Para ver los documentos de una materia de una carrera de un departamento
+	@GetMapping("/listadoDepartamentos/{departamento}/{carrera}/{materia}/{id}") //Para ver el documento seleccionado después de haber pasado por todos los filtros
 	public ModelAndView mostrarDocumentoIndividual(@PathVariable ("departamento") String departamento, @PathVariable ("carrera") String carrera, @PathVariable ("materia") String materia, @PathVariable ("id") long id) {
 		ModelAndView model = new ModelAndView("documento");
 		DocumentoModel documento = documentoService.traerDocumento(id);

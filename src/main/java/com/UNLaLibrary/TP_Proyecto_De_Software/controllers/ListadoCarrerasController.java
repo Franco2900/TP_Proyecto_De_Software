@@ -18,24 +18,32 @@ public class ListadoCarrerasController {
 	private IDocumentoService documentoService;
 
 	@GetMapping("/listadoCarreras") 
-	public ModelAndView navegarCarreras() { //Para ver todas las carreras de todas los departamentos
-		ModelAndView model = new ModelAndView("listadoCarreras");	
+	public ModelAndView navegarCarreras() { //Para ver todas las carreras de todos los departamentos
+		ModelAndView model = new ModelAndView("listadoCarrerasUniversal");	
 		List<String> listaCarreras = documentoService.traerCarreras();
 		
 		model.addObject("listaCarreras", listaCarreras);
-		model.addObject("departamento", "Todos los departamentos");
 		return model;
 	}
 	
 	
-	@GetMapping("listadoCarreras/{carrera}") //Para ver todos los documentos de una materia
+	@GetMapping("listadoCarreras/{carrera}") //Para ver todos los documentos de una carrera
 	public ModelAndView carreraIndividual(@PathVariable("carrera") String carrera) {
 		ModelAndView model = new ModelAndView("listadoDocumentos");
 		List<DocumentoModel> listaDocumentosDeLaCarrera = documentoService.traerDocumentosPorCarrera(carrera);
 		
 		model.addObject("listaDocumentos", listaDocumentosDeLaCarrera);
+		model.addObject("carrera", carrera);
 		return model;
 	}
 	
+	@GetMapping("listadoMaterias/{carrera}/{id}") //Para ver un documento en especifico
+	public ModelAndView documentoIndividual(@PathVariable("carrera") String carrera, @PathVariable ("id") long id) {
+		ModelAndView model = new ModelAndView("documento");
+		DocumentoModel documento = documentoService.traerDocumento(id);
+		
+		model.addObject("documento", documento);
+		return model;
+	}
 	
 }
