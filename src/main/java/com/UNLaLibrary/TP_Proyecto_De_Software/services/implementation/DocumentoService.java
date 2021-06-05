@@ -107,6 +107,25 @@ public class DocumentoService implements IDocumentoService{
     };
     
     
+    public List<DocumentoModel> traerDepartamentoXCarrera(String departamento, String carrera){
+    	List<DocumentoModel> listaDepartamentoXCarrera = new ArrayList<DocumentoModel>();
+    	
+    	for(Documento documento: documentoRepository.findDepartamentoXCarrera(departamento, carrera) ) {
+    		listaDepartamentoXCarrera.add(documentoConverter.entityToModel(documento) );
+    	}
+    	
+    	return listaDepartamentoXCarrera;
+    }
+    public List<DocumentoModel> traerDepartamentoXCarreraXMateria(String departamento, String carrera, String materia){
+    	List<DocumentoModel> listaDepartamentoXCarrera = new ArrayList<DocumentoModel>();
+    	
+    	for(Documento documento: documentoRepository.findDepartamentoXCarreraXMateria(departamento, carrera, materia) ) {
+    		listaDepartamentoXCarrera.add(documentoConverter.entityToModel(documento) );
+    	}
+    	
+    	return listaDepartamentoXCarrera;
+    }
+    
     public List<String> traerMaterias(){
     	List <String> lista = new ArrayList<String>();
 
@@ -147,4 +166,9 @@ public class DocumentoService implements IDocumentoService{
     	}
     	return lista;
     }
+
+    public DocumentoModel traerDocumento(long id) {
+    	return documentoConverter.entityToModel(documentoRepository.findDocumento(id) );
+    }
+    
 }

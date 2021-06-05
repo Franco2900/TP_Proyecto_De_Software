@@ -16,23 +16,24 @@
         <div class="col-md-4 mb-5">
           <div class="card h-100">                  
             <div class="card-body">
-              <h2 th:text="${carrera}" class="card-title">Carrera</h2>
+              <h2 th:text="${carrera.carrera}" class="card-title">Carrera</h2>
             </div>
             <div class="card-footer">
-              <a class="btn btn-outline-primary btn-sm" th:href="@{/listadoCarreras/} + ${carrera}">Ver documento</a>
+              <a class="btn btn-outline-primary btn-sm" th:href="@{/listadoDepartamentos/} + ${departamento} + @{/} + ${carrera.carrera}">Ver documento</a>
             </div>
           </div>
         </div>
       </div>
 
-	<div>
-	Ir al listado de: <p>
-	<a th:href="@{/listadoDepartamentos}"> Departamentos </a> <p>
-	<a th:href="@{/listadoCarreras}"> Carreras </a> <p>
-	<a th:href="@{/listadoMaterias}"> Materias </a> <p>
-	<a th:href="@{/listadoDocumentos}"> Todos los documentos </a> <p>
-	</div>
+    <div>
+    Ir al listado de: <p>
+    <a th:href="@{/listadoDepartamentos}"> Departamentos </a> <p>
+    <a th:href="@{/listadoCarreras}"> Carreras </a> <p>
+    <a th:href="@{/listadoMaterias}"> Materias </a> <p>
+    <a th:href="@{/listadoDocumentos}"> Todos los documentos </a> <p>
+    </div>
 
-      <footer th:replace="fragments/footer :: footer"> </footer>
-   </body>
+    <footer th:replace="fragments/footer :: footer"> </footer>
+    <footer th:replace="fragments/scripts :: scripts"> </footer>
+  </body>
 </html>

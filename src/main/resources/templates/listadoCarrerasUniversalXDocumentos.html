@@ -10,35 +10,24 @@
       </nav>
 
     <div class="container espaciador">
-      <h2 class="mb-4">Listado de Documentos de la materia <a th:text="${materia}"> </a>  de la carrera <a th:text="${carrera}"> </a> del departamento <a th:text="${departamento}"> </a></h2>
+      <h2 class="mb-4">Listado de documentos de la carrera <a th:text="${carrera}"> </a> </h2>
 
       <div th:each="documento:${listaDocumentos}" class="row col gx-4 gx-lg-5">
         <div class="col-md-4 mb-5">
           <div class="card h-100">                  
             <div class="card-body">
               <h2 th:text="${documento.titulo}" class="card-title">Título</h2>
-              <h5 th:text="${documento.materia}" class="card-text">Materia</h5>
+              <h5 th:text="${documento.departamento}" class="card-text">Departamento</h5>
               <p th:text="${documento.descripcion}" class="card-text">Resumen</p>
             </div>
             <div class="card-footer">
-              <a class="btn btn-outline-primary btn-sm" th:href="@{/listadoDepartamentos/} + ${departamento} + @{/} + ${carrera} + @{/} + ${materia} + @{/documento?id=} + ${documento.id}">Ver documento</a>
+              <a class="btn btn-outline-primary btn-sm" th:href="@{/listadoCarreras} + @{/} + ${carrera} + @{/documento?id=} + ${documento.id}">Ver documento</a>
             </div>
           </div>
         </div>
       </div>
       
-      <div>
-	Ir al listado de: <p>
-	<a th:href="@{/listadoDepartamentos}"> Departamentos </a> <p>
-	<a th:href="@{/listadoCarreras}"> Carreras </a> <p>
-	<a th:href="@{/listadoMaterias}"> Materias </a> <p>
-	<a th:href="@{/listadoDocumentos}"> Todos los documentos </a> <p>
-	</div>
-	
-	Filtrar por:
-	<a th:href="@{/listadoDepartamentos/} + ${departamento} + @{/materias}"> Materia </a>
-	<a th:href="@{/listadoDepartamentos/} + ${departamento} + @{/carreras}"> Carreras </a>
-
+  
       <footer th:replace="fragments/footer :: footer"> </footer>
       <footer th:replace="fragments/scripts :: scripts"> </footer>
    </body>
