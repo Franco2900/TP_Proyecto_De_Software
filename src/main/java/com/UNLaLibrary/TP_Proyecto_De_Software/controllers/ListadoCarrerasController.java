@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.UNLaLibrary.TP_Proyecto_De_Software.models.DocumentoModel;
@@ -29,7 +30,7 @@ public class ListadoCarrerasController {
 	
 	@GetMapping("listadoCarreras/{carrera}") //Para ver todos los documentos de una carrera
 	public ModelAndView carreraIndividual(@PathVariable("carrera") String carrera) {
-		ModelAndView model = new ModelAndView("listadoDocumentos");
+		ModelAndView model = new ModelAndView("listadoCarrerasUniversalXDocumentos");
 		List<DocumentoModel> listaDocumentosDeLaCarrera = documentoService.traerDocumentosPorCarrera(carrera);
 		
 		model.addObject("listaDocumentos", listaDocumentosDeLaCarrera);
@@ -37,8 +38,8 @@ public class ListadoCarrerasController {
 		return model;
 	}
 	
-	@GetMapping("listadoMaterias/{carrera}/{id}") //Para ver un documento en especifico
-	public ModelAndView documentoIndividual(@PathVariable("carrera") String carrera, @PathVariable ("id") long id) {
+	@GetMapping("listadoCarreras/{carrera}/documento") //Para ver un documento en especifico
+	public ModelAndView documentoIndividual(@PathVariable("carrera") String carrera, @RequestParam("id") long id) {
 		ModelAndView model = new ModelAndView("documento");
 		DocumentoModel documento = documentoService.traerDocumento(id);
 		
