@@ -36,18 +36,7 @@ public class ListadoDocumentosController {
 	public ModelAndView documentoIndividual(@RequestParam (defaultValue="1", name="id") long id) {
 		ModelAndView model = new ModelAndView("documento");
 		
-		List<DocumentoModel> documentoFiltrado = new ArrayList<DocumentoModel>();
-		for(DocumentoModel documento: documentoService.traerDocumentos() ) {
-			if(documento.getId() == id) {
-				documentoFiltrado.add(documento);
-				break;
-			}
-		}
-		
-		//Codigo para filtrar por id según el tuto que paso Fede
-		//List<DocumentoModel> documentoFiltrado = this.datosDePrueba().stream().filter((documento)->{return documento.getId()==id;}).collect(Collectors.toList());
-		
-		model.addObject("documento", documentoFiltrado.get(0) );
+		model.addObject("documento", documentoService.traerDocumento(id) );
 		return model;
 	}
 	
