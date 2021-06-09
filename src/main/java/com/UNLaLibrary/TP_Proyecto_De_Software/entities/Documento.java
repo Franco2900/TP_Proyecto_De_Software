@@ -11,25 +11,22 @@ public class Documento {
     private long idDocumento;
     private String titulo;
 	private String descripcion;
-	private String materia;
+    @ManyToOne
+    @JoinColumn(name = "materia", referencedColumnName = "idMateria", nullable = false)
+	private Materia materia;
 	private String profesor;
-	private String carrera;
-	private String departamento;
-	private String universidad;
     @Column(name = "hashArchivo")
 	private String hash;
 
-    public Documento() {}
+    public Documento() {
+    }
 
-    public Documento(long idDocumento, String titulo, String descripcion, String materia, String profesor, String carrera, String departamento, String universidad, String hash) {
+    public Documento(long idDocumento, String titulo, String descripcion, Materia materia, String profesor, String hash) {
         this.idDocumento = idDocumento;
         this.titulo = titulo;
         this.descripcion = descripcion;
         this.materia = materia;
         this.profesor = profesor;
-        this.carrera = carrera;
-        this.departamento = departamento;
-        this.universidad = universidad;
         this.hash = hash;
     }
 
@@ -57,11 +54,11 @@ public class Documento {
         this.descripcion = descripcion;
     }
 
-    public String getMateria() {
+    public Materia getMateria() {
         return this.materia;
     }
 
-    public void setMateria(String materia) {
+    public void setMateria(Materia materia) {
         this.materia = materia;
     }
 
@@ -73,36 +70,42 @@ public class Documento {
         this.profesor = profesor;
     }
 
-    public String getCarrera() {
-        return this.carrera;
-    }
-
-    public void setCarrera(String carrera) {
-        this.carrera = carrera;
-    }
-    
-    public String getDepartamento() {
-    	return departamento;
-    }
-
-    public void setDepartamento(String departamento) {
-    	this.departamento = departamento;
-    }
-    
-    public String getUniversidad() {
-        return this.universidad;
-    }
-
-    public void setUniversidad(String universidad) {
-        this.universidad = universidad;
-    }
-
     public String getHash() {
-		return hash;
-	}
+        return this.hash;
+    }
 
     public void setHash(String hash) {
         this.hash = hash;
+    }
+
+    public Documento idDocumento(long idDocumento) {
+        setIdDocumento(idDocumento);
+        return this;
+    }
+
+    public Documento titulo(String titulo) {
+        setTitulo(titulo);
+        return this;
+    }
+
+    public Documento descripcion(String descripcion) {
+        setDescripcion(descripcion);
+        return this;
+    }
+
+    public Documento materia(Materia materia) {
+        setMateria(materia);
+        return this;
+    }
+
+    public Documento profesor(String profesor) {
+        setProfesor(profesor);
+        return this;
+    }
+
+    public Documento hash(String hash) {
+        setHash(hash);
+        return this;
     }
 
     @Override
@@ -113,10 +116,7 @@ public class Documento {
             ", descripcion='" + getDescripcion() + "'" +
             ", materia='" + getMateria() + "'" +
             ", profesor='" + getProfesor() + "'" +
-            ", carrera='" + getCarrera() + "'" +
-            ", departamento='" + getDepartamento() + "'" +
-            ", universidad='" + getUniversidad() + "'" +
             ", hash='" + getHash() + "'" +
             "}";
-    }
+    }    
 }

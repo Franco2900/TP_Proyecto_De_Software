@@ -43,7 +43,7 @@ public class UserService implements UserDetailsService, IUserService {
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		User user = userRepository.findByUsernameAndFetchUserRolesEagerly(username);
-		return (UserDetails) buildUser(user, buildGrantedAuthorities(user.getUserRole()));
+		return buildUser(user, buildGrantedAuthorities(user.getUserRole()));
 	}
 	
 	private org.springframework.security.core.userdetails.User buildUser(User user, List<GrantedAuthority> grantedAuthorities) {
@@ -99,6 +99,13 @@ public class UserService implements UserDetailsService, IUserService {
 
 	public boolean checkIfEmailExists(String email){
 		return null != userRepository.findByEmail(email);
+	}
+
+	public UserModel traerUserPorUsername(String username){
+		User user = userRepository.findByUsernameAndFetchUserRolesEagerly(username);
+		UserModel userModel = userConverter.entityToModel(user);
+
+		return userModel;
 	}
 	
 	/* no pude probar esto

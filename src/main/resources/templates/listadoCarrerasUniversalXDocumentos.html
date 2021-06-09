@@ -3,11 +3,7 @@
    <head th:replace="fragments/head :: head(title='Listado de documentos | UNLa Library')"></head>
    
    <body>
-      <nav class="navbar encabezado">
-         <div class="container-fluid">
-            <span class="navbar-brand mb-0 h1">UNLa Library</span>
-         </div>
-      </nav>
+    <nav th:replace="fragments/navegacion"></nav>
 
     <div class="container espaciador">
       <h2 class="mb-4">Listado de documentos de la carrera <a th:text="${carrera}"> </a> </h2>
@@ -17,7 +13,7 @@
           <div class="card h-100">                  
             <div class="card-body">
               <h2 th:text="${documento.titulo}" class="card-title">Título</h2>
-              <h5 th:text="${documento.departamento}" class="card-text">Departamento</h5>
+              <h5 th:text="${documento.materia.departamento}" class="card-text">Departamento</h5>
               <p th:text="${documento.descripcion}" class="card-text">Resumen</p>
             </div>
             <div class="card-footer">

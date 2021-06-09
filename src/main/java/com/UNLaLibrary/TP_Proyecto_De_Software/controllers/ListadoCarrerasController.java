@@ -11,17 +11,20 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.UNLaLibrary.TP_Proyecto_De_Software.models.DocumentoModel;
 import com.UNLaLibrary.TP_Proyecto_De_Software.services.IDocumentoService;
+import com.UNLaLibrary.TP_Proyecto_De_Software.services.IMateriaService;
 
 @Controller
 public class ListadoCarrerasController {
 
 	@Autowired
 	private IDocumentoService documentoService;
+	@Autowired 
+	private IMateriaService materiaService;
 
 	@GetMapping("/listadoCarreras") 
 	public ModelAndView navegarCarreras() { //Para ver todas las carreras de todos los departamentos
 		ModelAndView model = new ModelAndView("listadoCarrerasUniversal");	
-		List<String> listaCarreras = documentoService.traerCarreras();
+		List<String> listaCarreras = materiaService.traerCarreras();
 		
 		model.addObject("listaCarreras", listaCarreras);
 		return model;

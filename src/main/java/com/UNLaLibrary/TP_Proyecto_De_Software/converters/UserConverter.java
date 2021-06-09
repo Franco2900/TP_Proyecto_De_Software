@@ -20,10 +20,12 @@ public class UserConverter {
 	
 		
 	public UserModel entityToModel(User entity) {
-		return new UserModel(entity.getId(), entity.getEmail(), entity.getUsername(), entity.getPassword(), entity.isEnabled(), userRoleConverter.entityToModel(entity.getUserRole()));
+		return new UserModel(entity.getId(), entity.getEmail(), entity.getUsername(), entity.getPassword(), 
+			entity.isEnabled(), userRoleConverter.entityToModel(entity.getUserRole()), entity.getMaterias());
 	}
 	
 	public User modelToEntity(UserModel model) {
-		return new User(model.getId(), model.getEmail(), model.getUsername(), model.getPassword(), model.isEnabled(), userRoleConverter.modelToEntity(model.getUserRole()));
+		return new User(model.getId(), model.getEmail(), model.getUsername(), model.getPassword(), 
+		model.isEnabled(), userRoleConverter.modelToEntity(model.getUserRole()), model.getMaterias());
 	}
 }

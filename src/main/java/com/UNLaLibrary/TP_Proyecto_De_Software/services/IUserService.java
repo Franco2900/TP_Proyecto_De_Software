@@ -6,4 +6,5 @@ import com.UNLaLibrary.TP_Proyecto_De_Software.models.UserModel;
 
 public interface IUserService {
     public void registro(UserModel userModel) throws UsernameAlreadyExistException, EmailAlreadyExistException;
+    public UserModel traerUserPorUsername(String username);
 }

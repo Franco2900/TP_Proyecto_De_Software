@@ -1,8 +1,12 @@
 package com.UNLaLibrary.TP_Proyecto_De_Software.models;
 
+import java.util.Set;
+
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
+
+import com.UNLaLibrary.TP_Proyecto_De_Software.entities.Materia;
 
 public class UserModel {
 	private int id;
@@ -16,23 +20,24 @@ public class UserModel {
 	private String password;
 	private boolean enabled;
 	private UserRoleModel userRole;
+	private Set<Materia> materias;
 	
 	public UserModel() {
 		super();
 	}
 
-	public UserModel(int id, String email, String username, String password, boolean enabled, UserRoleModel userRole) {
-		super();
+	public UserModel(int id, String email, String username, String password, boolean enabled, UserRoleModel userRole, Set<Materia> materias) {
 		this.id = id;
 		this.email = email;
 		this.username = username;
 		this.password = password;
 		this.enabled = enabled;
 		this.userRole = userRole;
+		this.materias = materias;
 	}
 
 	public int getId() {
-		return id;
+		return this.id;
 	}
 
 	public void setId(int id) {
@@ -40,7 +45,7 @@ public class UserModel {
 	}
 
 	public String getEmail() {
-		return email;
+		return this.email;
 	}
 
 	public void setEmail(String email) {
@@ -48,7 +53,7 @@ public class UserModel {
 	}
 
 	public String getUsername() {
-		return username;
+		return this.username;
 	}
 
 	public void setUsername(String username) {
@@ -56,7 +61,7 @@ public class UserModel {
 	}
 
 	public String getPassword() {
-		return password;
+		return this.password;
 	}
 
 	public void setPassword(String password) {
@@ -64,7 +69,11 @@ public class UserModel {
 	}
 
 	public boolean isEnabled() {
-		return enabled;
+		return this.enabled;
+	}
+
+	public boolean getEnabled() {
+		return this.enabled;
 	}
 
 	public void setEnabled(boolean enabled) {
@@ -72,11 +81,31 @@ public class UserModel {
 	}
 
 	public UserRoleModel getUserRole() {
-		return userRole;
+		return this.userRole;
 	}
 
 	public void setUserRole(UserRoleModel userRole) {
 		this.userRole = userRole;
 	}
 
+	public Set<Materia> getMaterias() {
+		return this.materias;
+	}
+
+	public void setMaterias(Set<Materia> materias) {
+		this.materias = materias;
+	}
+
+	@Override
+	public String toString() {
+		return "{" +
+			" id='" + getId() + "'" +
+			", email='" + getEmail() + "'" +
+			", username='" + getUsername() + "'" +
+			", password='" + getPassword() + "'" +
+			", enabled='" + isEnabled() + "'" +
+			", userRole='" + getUserRole() + "'" +
+			", materias='" + getMaterias() + "'" +
+			"}";
+	}
 }

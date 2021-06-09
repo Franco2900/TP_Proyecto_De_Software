@@ -3,11 +3,7 @@
    <head th:replace="fragments/head :: head(title='Listado de Materias | UNLa Library')"></head>
    
    <body>
-      <nav class="navbar encabezado">
-         <div class="container-fluid">
-            <span class="navbar-brand mb-0 h1">UNLa Library</span>
-         </div>
-      </nav>
+    <nav th:replace="fragments/navegacion"></nav>
 
     <div class="container espaciador">
       <h2 class="mb-4">Listado de Carreras de <a th:text="${departamento}"> </a> </h2>
@@ -16,10 +12,10 @@
         <div class="col-md-4 mb-5">
           <div class="card h-100">                  
             <div class="card-body">
-              <h2 th:text="${carrera.carrera}" class="card-title">Carrera</h2>
+              <h2 th:text="${carrera}" class="card-title">Carrera</h2>
             </div>
             <div class="card-footer">
-              <a class="btn btn-outline-primary btn-sm" th:href="@{/listadoDepartamentos/} + ${departamento} + @{/} + ${carrera.carrera}">Ver documento</a>
+              <a class="btn btn-outline-primary btn-sm" th:href="@{/listadoDepartamentos/} + ${departamento} + @{/} + ${carrera}">Ver documento</a>
             </div>
           </div>
         </div>

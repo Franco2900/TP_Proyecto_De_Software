@@ -3,11 +3,7 @@
    <head th:replace="fragments/head :: head(title='Departamentos | UNLa Library')"></head>
    
    <body>
-      <nav class="navbar encabezado">
-         <div class="container-fluid">
-            <span class="navbar-brand mb-0 h1">UNLa Library</span>
-         </div>
-      </nav>
+      <nav th:replace="fragments/navegacion"></nav>
       <main>
          <div class="container espaciador">
             <h2 class="mb-4">Elija un departamento</h2>

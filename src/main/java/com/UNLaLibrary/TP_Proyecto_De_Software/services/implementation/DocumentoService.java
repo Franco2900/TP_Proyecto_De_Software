@@ -43,9 +43,7 @@ public class DocumentoService implements IDocumentoService{
         documentoModel.setHash();
         guardarDocumento(archivoPDF, documentoModel.getHash());
 
-        DocumentoConverter documentoConverter = new DocumentoConverter();
         Documento documento = documentoConverter.modelToEntity(documentoModel);
-        System.out.println(documento);
         documentoRepository.save(documento);
     }
 
@@ -59,7 +57,6 @@ public class DocumentoService implements IDocumentoService{
     public List<DocumentoModel> traerDocumentos(){
         List<DocumentoModel> documentoModels = new ArrayList<DocumentoModel>();
         List<Documento> documentos = documentoRepository.findTodo();
-        DocumentoConverter documentoConverter = new DocumentoConverter();
 
         for(Documento d:documentos){
             documentoModels.add(documentoConverter.entityToModel(d));
@@ -77,7 +74,6 @@ public class DocumentoService implements IDocumentoService{
     }
     
     
-    
     public List<DocumentoModel> traerDocumentosPorDepartamento(String dep){
     	List<DocumentoModel> listaDocumentosFiltradosPorDepartamento = new ArrayList<DocumentoModel>();
     	
@@ -87,6 +83,7 @@ public class DocumentoService implements IDocumentoService{
 	    
 	    return listaDocumentosFiltradosPorDepartamento;
     }
+
     public List<DocumentoModel> traerDocumentosPorCarrera(String carrera){
     	List<DocumentoModel> listaDocumentosXCarrera = new ArrayList<DocumentoModel>();
 
@@ -96,6 +93,7 @@ public class DocumentoService implements IDocumentoService{
 
     	return listaDocumentosXCarrera;
     };
+
     public List<DocumentoModel> traerDocumentosPorMateria(String materia){
     	List<DocumentoModel> listaDocumentosXMaterias = new ArrayList<DocumentoModel>();
 
@@ -105,8 +103,7 @@ public class DocumentoService implements IDocumentoService{
 
     	return listaDocumentosXMaterias;
     };
-    
-    
+
     public List<DocumentoModel> traerDepartamentoXCarrera(String departamento, String carrera){
     	List<DocumentoModel> listaDepartamentoXCarrera = new ArrayList<DocumentoModel>();
     	
@@ -116,6 +113,7 @@ public class DocumentoService implements IDocumentoService{
     	
     	return listaDepartamentoXCarrera;
     }
+    
     public List<DocumentoModel> traerDepartamentoXCarreraXMateria(String departamento, String carrera, String materia){
     	List<DocumentoModel> listaDepartamentoXCarrera = new ArrayList<DocumentoModel>();
     	
@@ -126,49 +124,7 @@ public class DocumentoService implements IDocumentoService{
     	return listaDepartamentoXCarrera;
     }
     
-    public List<String> traerMaterias(){
-    	List <String> lista = new ArrayList<String>();
-
-    	//Recorro la lista de documentos y añado a la listaCarreras un solo documento por carrera. Despues en la vista uso esos documentos para sacar el nombre de la carrera
-    	for(DocumentoModel documento: traerDocumentos() ) { //Recorro la lista de documentos
-    				
-    		if(lista.isEmpty() ) lista.add(documento.getMateria()); //En la primera vuelta listaCarreras siempre va a estar vacio así que le añado una carrera
-    		boolean bandera = false; 								   //bandera para saber si una carrera se repite o no
-    				
-    		for(String s: lista) { 				  //Recorro la listaCarreras para chequear si ya esta la carrera o no en la lista
-    			if(documento.getMateria().equals(s) ){ //Si ya esta la carrera en listaCarrera dejo de chequear 
-    				bandera = true;
-    				break;
-    			}
-    		}
-    				
-    		if(bandera == false) lista.add(documento.getMateria());
-    	}
-    	return lista;
-    }
-    public List<String> traerCarreras(){
-    	List <String> lista = new ArrayList<String>();
-    	
-    	//Recorro la lista de documentos y añado a la listaCarreras un solo documento por carrera. Despues en la vista uso esos documentos para sacar el nombre de la carrera
-    	for(DocumentoModel documento: traerDocumentos() ) { //Recorro la lista de documentos
-    				
-    		if(lista.isEmpty() ) lista.add(documento.getCarrera()); //En la primera vuelta listaCarreras siempre va a estar vacio así que le añado una carrera
-    		boolean bandera = false; 								   //bandera para saber si una carrera se repite o no
-    				
-    		for(String s: lista) { 				  //Recorro la listaCarreras para chequear si ya esta la carrera o no en la lista
-    			if(documento.getCarrera().equals(s) ){ //Si ya esta la carrera en listaCarrera dejo de chequear 
-    				bandera = true;
-    				break;
-    			}
-    		}
-    				
-    		if(bandera == false) lista.add(documento.getCarrera());
-    	}
-    	return lista;
-    }
-
     public DocumentoModel traerDocumento(long id) {
     	return documentoConverter.entityToModel(documentoRepository.findDocumento(id) );
     }
-    
 }

@@ -8,7 +8,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView; //Para poder usar mezclar las vistas html con los modelos
 
 import com.UNLaLibrary.TP_Proyecto_De_Software.models.DocumentoModel;
+import com.UNLaLibrary.TP_Proyecto_De_Software.models.MateriaModel;
 import com.UNLaLibrary.TP_Proyecto_De_Software.services.IDocumentoService;
+import com.UNLaLibrary.TP_Proyecto_De_Software.services.IMateriaService;
 
 import java.util.List;
 
@@ -17,13 +19,15 @@ public class NavegacionController {
 	
 	@Autowired
 	private IDocumentoService documentoService;
+	@Autowired
+	private IMateriaService materiaService;
 	
 	//@GetMapping("/listadoDepartamentos/{departamento}/carreras/{carrera}/materias/{materia}/documento/{id}") Otra forma
 	
 	@GetMapping("/listadoDepartamentos/{departamento}") //Para ver las carreras del departamento
 	public ModelAndView mostrarCarreras(@PathVariable("departamento") String departamento) {
 		ModelAndView model = new ModelAndView("listadoCarreras");
-		List<DocumentoModel> listaCarreras = documentoService.traerDocumentosPorDepartamento(departamento);
+		List<String> listaCarreras = materiaService.traerCarrerasPorDepartamento(departamento);
 		
 		model.addObject("listaCarreras", listaCarreras);
 		model.addObject("departamento", departamento);
@@ -33,7 +37,7 @@ public class NavegacionController {
 	@GetMapping("/listadoDepartamentos/{departamento}/{carrera}") //Para ver las materias de la carrera del departamento
 	public ModelAndView mostrarMaterias(@PathVariable ("departamento") String departamento, @PathVariable ("carrera") String carrera) {
 		ModelAndView model = new ModelAndView("listadoMaterias");
-		List<DocumentoModel> listaMaterias = documentoService.traerDepartamentoXCarrera(departamento, carrera);
+		List<MateriaModel> listaMaterias = materiaService.traerMateriasPorCarreraYDepartamento(carrera, departamento);
 		
 		model.addObject("listaMaterias", listaMaterias);
 		model.addObject("departamento", departamento);

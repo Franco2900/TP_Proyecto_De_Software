@@ -1,6 +1,7 @@
 package com.UNLaLibrary.TP_Proyecto_De_Software.controllers;
 
 import java.security.Principal;
+import java.util.Collection;
 
 import javax.validation.Valid;
 
@@ -11,6 +12,9 @@ import com.UNLaLibrary.TP_Proyecto_De_Software.services.IUserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -44,7 +48,17 @@ public class UserController {
 	
 	@GetMapping("/loginsuccess")
 	public String loginCheck() {
-		return "redirect:/listadoDepartamentos";
+		String redirectPage = "redirect:/listadoDepartamentos";
+
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
+		boolean isProfesor = authorities.contains(new SimpleGrantedAuthority("ROLE_PROFESOR"));
+
+		if(isProfesor){
+			redirectPage = "redirect:/misCursos";
+		}
+
+		return redirectPage;
 	}
 
 	@GetMapping("/registro") // Agrega un usuario vacio para el formulario

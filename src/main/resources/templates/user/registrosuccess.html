@@ -2,11 +2,7 @@
 <html lang="en">
     <head th:replace="fragments/head :: head(title='Registro | UNLa Library')"></head>
     <body>
-        <nav class="navbar encabezado fixed-top">
-            <div class="container-fluid">
-              <span class="navbar-brand mb-0 h1">UNLa Library</span>
-            </div>
-          </nav>
+        <nav th:replace="fragments/navegacion"></nav>
         <div class="container-login">
             <div class="d-flex flex-column align-items-center w-100">
                 <img src="../static/img/iconos/check.svg" class="mb-4" style="width:70px" th:src="@{../img/iconos/check.svg}">

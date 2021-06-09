@@ -2,8 +2,6 @@ package com.UNLaLibrary.TP_Proyecto_De_Software.controllers;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -15,12 +13,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.UNLaLibrary.TP_Proyecto_De_Software.models.DocumentoModel;
 import com.UNLaLibrary.TP_Proyecto_De_Software.services.IDocumentoService;
 
 @Controller
 public class ListadoDocumentosController {
-	
 	@Autowired
 	private IDocumentoService documentoService;
 	

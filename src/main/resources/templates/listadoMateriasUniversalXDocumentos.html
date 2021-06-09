@@ -3,25 +3,35 @@
    <head th:replace="fragments/head :: head(title='Listado de documentos | UNLa Library')"></head>
    
    <body>
-      <nav class="navbar encabezado">
-         <div class="container-fluid">
-            <span class="navbar-brand mb-0 h1">UNLa Library</span>
-         </div>
-      </nav>
+    <nav th:replace="fragments/navegacion"></nav>
 
     <div class="container espaciador">
       <h2 class="mb-4">Listado de documentos de la materia <a th:text="${materia}"> </a> </h2>
-
-      <div th:each="documento:${listaDocumentos}" class="row col gx-4 gx-lg-5">
-        <div class="col-md-4 mb-5">
+      
+      <div class="row">
+        <div th:each="documento:${listaDocumentos}" class="col-lg-4 col-md-6 col-sm-12 mb-5">
           <div class="card h-100">                  
             <div class="card-body">
               <h2 th:text="${documento.titulo}" class="card-title">Título</h2>
-              <h5 th:text="${documento.departamento}" class="card-text">Departamento</h5>
+              <h5 th:text="${documento.materia.departamento}" class="card-text">Departamento</h5>
               <p th:text="${documento.descripcion}" class="card-text">Resumen</p>
             </div>
             <div class="card-footer">
-              <a class="btn btn-outline-primary btn-sm" th:href="@{/listadoMaterias} + @{/} + ${materia} + @{/documento?id=} + ${documento.id}">Ver documento</a>
+              <div class="d-flex">
+                <a class="btn btn-outline-primary me-2" th:href="@{/listadoMaterias} + @{/} + ${materia} + @{/documento?id=} + ${documento.id}">Ver documento</a>
+                
+                <div class="dropdown" sec:authorize="hasRole('ROLE_PROFESOR')">
+                  <a class="btn btn-outline-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                    Opciones
+                  </a>
+                
+                  <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                    <li><a class="dropdown-item" href="#">Modificar</a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a class="dropdown-item text-danger" href="#">Eliminar</a></li>
+                  </ul>
+                </div>
+              </div>
             </div>
           </div>
         </div>

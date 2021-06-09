@@ -4,11 +4,7 @@
     <head th:replace="fragments/head :: head(title='Registro | UNLa Library')"></head>  
   
     <body class="text-center">
-        <nav class="navbar encabezado fixed-top">
-            <div class="container-fluid">
-                <span class="navbar-brand mb-0 h1">UNLa Library</span>
-            </div>
-        </nav>
+        <nav th:replace="fragments/navegacion"></nav>
 
         <div class="container-login">
             <div class="form-login">

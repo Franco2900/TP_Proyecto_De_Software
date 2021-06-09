@@ -1,5 +1,7 @@
 package com.UNLaLibrary.TP_Proyecto_De_Software.entities;
 
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -7,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -33,21 +36,28 @@ public class User {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="userRole", nullable=false)
 	private UserRole userRole;
+
+	// Si es un alumno tiene todas las materias de su carrera, si es profesor
+	// puede tener mas de una y en distintas universidades/carreras
+	@ManyToMany(mappedBy = "users")
+	private Set<Materia> materias;
 		
 	public User() {}
 
-	public User(int id, String email, String username, String password, boolean enabled, UserRole userRole) {
-		super();
+
+	public User(int id, String email, String username, String password, boolean enabled, UserRole userRole, Set<Materia> materias) {
 		this.id = id;
 		this.email = email;
 		this.username = username;
 		this.password = password;
 		this.enabled = enabled;
 		this.userRole = userRole;
+		this.materias = materias;
 	}
 
+
 	public int getId() {
-		return id;
+		return this.id;
 	}
 
 	public void setId(int id) {
@@ -55,7 +65,7 @@ public class User {
 	}
 
 	public String getEmail() {
-		return email;
+		return this.email;
 	}
 
 	public void setEmail(String email) {
@@ -63,7 +73,7 @@ public class User {
 	}
 
 	public String getUsername() {
-		return username;
+		return this.username;
 	}
 
 	public void setUsername(String username) {
@@ -71,7 +81,7 @@ public class User {
 	}
 
 	public String getPassword() {
-		return password;
+		return this.password;
 	}
 
 	public void setPassword(String password) {
@@ -79,7 +89,11 @@ public class User {
 	}
 
 	public boolean isEnabled() {
-		return enabled;
+		return this.enabled;
+	}
+
+	public boolean getEnabled() {
+		return this.enabled;
 	}
 
 	public void setEnabled(boolean enabled) {
@@ -87,12 +101,32 @@ public class User {
 	}
 
 	public UserRole getUserRole() {
-		return userRole;
+		return this.userRole;
 	}
 
 	public void setUserRole(UserRole userRole) {
 		this.userRole = userRole;
 	}
 
+	public Set<Materia> getMaterias() {
+		return this.materias;
+	}
+
+	public void setMaterias(Set<Materia> materias) {
+		this.materias = materias;
+	}
 	
+
+	@Override
+	public String toString() {
+		return "{" +
+			" id='" + getId() + "'" +
+			", email='" + getEmail() + "'" +
+			", username='" + getUsername() + "'" +
+			", password='" + getPassword() + "'" +
+			", enabled='" + isEnabled() + "'" +
+			", userRole='" + getUserRole() + "'" +
+			", materias='" + getMaterias() + "'" +
+			"}";
+	}
 }

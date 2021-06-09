@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head th:replace="fragments/head :: head(title='Mis cursos | UNLa Library')"></head>
+   
+  <body>
+    <nav th:replace="fragments/navegacion"></nav>
+
+    <div class="container espaciador">
+      <h2 class="mb-4">Mis Cursos</h2>
+
+      <div class="row">
+        <div th:each="materia:${listaMaterias}" class="col-lg-4 col-md-6 col-sm-12 mb-5">
+          <div class="card h-100">
+            <div class="card-body">
+              <h2 class="card-text">Materia: <a th:text="${materia.nombre}"></a> </h2>
+              <h5 class="card-text">Carrera: <a th:text="${materia.carrera}"></a> </h5>
+              <h5 class="card-text">Departamento: <a th:text="${materia.departamento}"></a> </h5>
+            </div>
+            <div class="card-footer">
+              <div class="d-flex">
+                <a class="btn btn-outline-primary me-2" th:href="@{/misCursos/} + ${materia.nombre}">Ver materia</a>
+                <a class="btn btn-outline-secondary" th:href="@{/agregarDocumento/materia?id=} + ${materia.idMateria}">Subir documento</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+
+    <footer th:replace="fragments/footer :: footer"> </footer>
+    <footer th:replace="fragments/scripts :: scripts"> </footer>
+  </body>
+</html>
