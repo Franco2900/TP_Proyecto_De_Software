@@ -127,4 +127,13 @@ public class DocumentoService implements IDocumentoService{
     public DocumentoModel traerDocumento(long id) {
     	return documentoConverter.entityToModel(documentoRepository.findDocumento(id) );
     }
+
+    public void eliminarDocumento(long id){
+        Documento documento = documentoRepository.findDocumento(id);
+        File archivoPDF = this.docStorageLocation.resolve(documento.getHash() + ".pdf").toFile();
+        
+        if(archivoPDF.delete()){
+            documentoRepository.delete(documento);
+        }
+    }
 }

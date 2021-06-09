@@ -36,3 +36,16 @@
     padding: 15px;
     margin: auto;
 }
+
+.add-documento-container{
+    border-style: dotted;
+    border-radius: 20px;
+}
+
+.add-documento-container:hover{
+    border-style: solid;
+}
+
+.add-documento{
+    height: 70px;
+}

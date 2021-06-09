@@ -54,13 +54,14 @@ public class ListadoMateriasController {
 		return model;
 	}
 
-	@GetMapping("misCursos/{materia}")
-	public ModelAndView materiaProfesor(@PathVariable("materia") String materia){
-		ModelAndView model = new ModelAndView("listadoMateriasUniversalXDocumentos");
-		List<DocumentoModel> listaDocumentos = documentoService.traerDocumentosPorMateria(materia);
+	@GetMapping("misCursos/materia")
+	public ModelAndView materiaProfesor(@RequestParam("id") long idMateria){
+		ModelAndView model = new ModelAndView("listadoMateriasProfesor");
+		MateriaModel materiaModel = materiaService.traerMateria(idMateria);
+		List<DocumentoModel> listaDocumentos = documentoService.traerDocumentosPorMateria(materiaModel.getNombre());
 
 		model.addObject("listaDocumentos", listaDocumentos);
-		model.addObject("materia", materia);
+		model.addObject("materia", materiaModel);
 		return model;
 	}
 	

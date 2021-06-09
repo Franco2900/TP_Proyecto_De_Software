@@ -19,4 +19,5 @@ public interface IDocumentoService {
     public List<DocumentoModel> traerDepartamentoXCarrera(String departamento, String carrera);
     public List<DocumentoModel> traerDepartamentoXCarreraXMateria(String departamento, String carrera, String materia);
     public DocumentoModel traerDocumento(long id);
+    public void eliminarDocumento(long id);
 }

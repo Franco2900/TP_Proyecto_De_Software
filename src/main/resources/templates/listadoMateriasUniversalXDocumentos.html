@@ -17,21 +17,7 @@
               <p th:text="${documento.descripcion}" class="card-text">Resumen</p>
             </div>
             <div class="card-footer">
-              <div class="d-flex">
-                <a class="btn btn-outline-primary me-2" th:href="@{/listadoMaterias} + @{/} + ${materia} + @{/documento?id=} + ${documento.id}">Ver documento</a>
-                
-                <div class="dropdown" sec:authorize="hasRole('ROLE_PROFESOR')">
-                  <a class="btn btn-outline-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-                    Opciones
-                  </a>
-                
-                  <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                    <li><a class="dropdown-item" href="#">Modificar</a></li>
-                    <li><hr class="dropdown-divider"></li>
-                    <li><a class="dropdown-item text-danger" href="#">Eliminar</a></li>
-                  </ul>
-                </div>
-              </div>
+              <a class="btn btn-outline-primary me-2" th:href="@{/listadoMaterias} + @{/} + ${materia} + @{/documento?id=} + ${documento.id}">Ver documento</a>
             </div>
           </div>
         </div>

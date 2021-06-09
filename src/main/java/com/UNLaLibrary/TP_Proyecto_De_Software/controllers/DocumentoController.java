@@ -46,6 +46,16 @@ public class DocumentoController {
         DocumentoModel documentoModel = new DocumentoModel(0L, titulo, descripcion, materiaModel, userDetails.getUsername(), "");
         documentoService.agregarDocumento(documentoModel, archivoPDF);
 
-        return "redirect:/listadoDocumentos";
+        return "redirect:/misCursos/" + materiaModel.getNombre();
+    }
+
+    @GetMapping("/eliminarDocumento")
+    public String eliminarDocumento(@RequestParam("id") long idDocumento){
+        DocumentoModel documentoModel = documentoService.traerDocumento(idDocumento);
+        String materia = documentoModel.getMateria().getNombre();
+
+        documentoService.eliminarDocumento(idDocumento);
+
+        return "redirect:/misCursos/" + materia;
     }
 }

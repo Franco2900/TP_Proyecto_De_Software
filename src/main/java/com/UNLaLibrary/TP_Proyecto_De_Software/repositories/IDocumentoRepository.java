@@ -32,5 +32,4 @@ public interface IDocumentoRepository extends JpaRepository<Documento, Long>{
 
 	@Query("FROM Documento WHERE id=(:id) ")
 	public abstract Documento findDocumento(@Param("id") long id);
-	
 }

@@ -18,7 +18,7 @@
             </div>
             <div class="card-footer">
               <div class="d-flex">
-                <a class="btn btn-outline-primary me-2" th:href="@{/misCursos/} + ${materia.nombre}">Ver materia</a>
+                <a class="btn btn-outline-primary me-2" th:href="@{/misCursos/materia?id=} + ${materia.idMateria}">Ver materia</a>
                 <a class="btn btn-outline-secondary" th:href="@{/agregarDocumento/materia?id=} + ${materia.idMateria}">Subir documento</a>
               </div>
             </div>
