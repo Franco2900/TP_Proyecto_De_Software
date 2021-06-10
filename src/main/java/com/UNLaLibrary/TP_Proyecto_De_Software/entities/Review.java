@@ -3,7 +3,7 @@ package com.UNLaLibrary.TP_Proyecto_De_Software.entities;
 import javax.persistence.*;
 
 @Entity
-public class Review{
+public class Review implements Comparable<Review>{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long idReview;
@@ -75,6 +75,15 @@ public class Review{
 
     public void setDocumento(Documento documento) {
         this.documento = documento;
+    }
+
+    public int compareTo(Review review){
+        if(this.idReview > review.getIdReview()){
+            return 1;
+        }
+        else{
+            return -1;
+        }
     }
 
     @Override

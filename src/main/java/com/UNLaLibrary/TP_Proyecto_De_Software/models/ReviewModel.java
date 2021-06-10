@@ -1,6 +1,6 @@
 package com.UNLaLibrary.TP_Proyecto_De_Software.models;
 
-public class ReviewModel {
+public class ReviewModel implements Comparable<ReviewModel>{
     private long idReview;
     private int valoracion;
     private String titulo;
@@ -66,6 +66,15 @@ public class ReviewModel {
 
     public void setDocumento(DocumentoModel documento) {
         this.documento = documento;
+    }
+
+    public int compareTo(ReviewModel reviewModel){
+        if(this.idReview > reviewModel.getIdReview()){
+            return 1;
+        }
+        else{
+            return -1;
+        }
     }
 
     @Override

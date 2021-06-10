@@ -8,7 +8,7 @@
     <div class="container espaciador">
       <h2 class="mb-4">Detalle de documento</h2>
 		  <div class="row gx-4 gx-lg-5">
-        <div class="col-md-4 mb-5">
+        <div class="col-md-4 col-sm-12 mb-5">
           <div class="card">                  
             <div class="card-body">
               <h2 th:text="${documento.titulo}" class="card-title"></h2>
@@ -45,12 +45,12 @@
           </div>
         </div>
         <!-- Reviews -->
-        <div class="col-md-8 mb-5">
+        <div class="col-md-8 col-sm-12 mb-5">
           <div class="card">
             <div class="card-body p-4">
               <!-- Promedio general de reviews y distribucion -->
-              <div class="valoracion-total d-flex justify-content-center">
-                <div class="valoracion-promedio text-end pe-5">
+              <div class="valoracion-total row">
+                <div class="valoracion-promedio col-md-6 col-sm-12 text-end pe-5">
                   <h1 class="display-4" th:text="${#numbers.formatDecimal(promedio, 0, 1)}"></h1>
                   <div class="pb-2">
                     <i class="fa fa-lg text-primary pe-1" th:classappend="${reviewSize} > 0 ? fa-star: fa-star-o"></i>
@@ -59,9 +59,9 @@
                     <i class="fa fa-lg text-primary pe-1" th:classappend="${promedio} >= 4 ? fa-star: (${promedio} > 3 ? fa-star-half-o : fa-star-o)"></i>
                     <i class="fa fa-lg text-primary pe-1" th:classappend="${promedio} >= 5 ? fa-star: (${promedio} > 4 ? fa-star-half-o : fa-star-o)"></i>
                   </div>
-                  <p class="text-black-50" th:text="'Promedio entre ' + ${reviewSize} + ' opiniones'"></p>
+                  <p class="text-black-50" style="font-size: 0.9em;" th:text="'Promedio entre ' + ${reviewSize} + ' opiniones'"></p>
                 </div>
-                <div class="valoracion-estrellas w-50 text-black-50">
+                <div class="valoracion-estrellas col-md-6 col-sm-12 text-black-50 ps-4">
                   <div class="d-flex pb-1">
                     <p class="m-0 pe-3">5 estrellas</p>
                     <div class="progress align-self-center" style="height: 5px; width: 120px;">
@@ -102,7 +102,7 @@
               </div>
               <hr th:if="${reviewSize} > 0"/>
               <!-- Listado de todas las reviews -->
-              <div th:each="review:${documento.reviews}" class="review pb-4">
+              <div th:each="review:${#lists.sort(documento.reviews)}" class="review pb-4">
                 <div class="valoracion pb-2">
                   <i class="fa fa-star text-primary pe-1"></i>
                   <i class="fa text-primary pe-1" th:classappend="${review.valoracion} >= 2 ? fa-star: (${review.valoracion} > 1 ? fa-star-half-o : fa-star-o)"></i>
