@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.UNLaLibrary.TP_Proyecto_De_Software.models.DocumentoModel;
@@ -40,14 +39,4 @@ public class ListadoCarrerasController {
 		model.addObject("carrera", carrera);
 		return model;
 	}
-	
-	@GetMapping("listadoCarreras/{carrera}/documento") //Para ver un documento en especifico
-	public ModelAndView documentoIndividual(@PathVariable("carrera") String carrera, @RequestParam("id") long id) {
-		ModelAndView model = new ModelAndView("documento");
-		DocumentoModel documento = documentoService.traerDocumento(id);
-		
-		model.addObject("documento", documento);
-		return model;
-	}
-	
 }

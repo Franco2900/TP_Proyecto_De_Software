@@ -64,14 +64,4 @@ public class ListadoMateriasController {
 		model.addObject("materia", materiaModel);
 		return model;
 	}
-	
-	@GetMapping("listadoMaterias/{materia}/documento") //Para ver un documento en especifico
-	public ModelAndView documentoIndividual(@PathVariable ("materia") String materia, @RequestParam ("id") long id) {
-		ModelAndView model = new ModelAndView("documento");
-		DocumentoModel documento = documentoService.traerDocumento(id);
-		
-		model.addObject("documento", documento);
-		return model;
-	}
-	
 }

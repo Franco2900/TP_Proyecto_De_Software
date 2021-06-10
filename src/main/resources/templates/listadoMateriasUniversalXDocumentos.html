@@ -17,7 +17,7 @@
               <p th:text="${documento.descripcion}" class="card-text">Resumen</p>
             </div>
             <div class="card-footer">
-              <a class="btn btn-outline-primary me-2" th:href="@{/listadoMaterias} + @{/} + ${materia} + @{/documento?id=} + ${documento.id}">Ver documento</a>
+              <a class="btn btn-outline-primary me-2" th:href="@{/listadoDocumentos/documento?id=} + ${documento.id}">Ver documento</a>
             </div>
           </div>
         </div>

@@ -16,8 +16,12 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.UNLaLibrary.TP_Proyecto_De_Software.models.DocumentoModel;
 import com.UNLaLibrary.TP_Proyecto_De_Software.models.MateriaModel;
+import com.UNLaLibrary.TP_Proyecto_De_Software.models.ReviewModel;
+import com.UNLaLibrary.TP_Proyecto_De_Software.models.UserModel;
 import com.UNLaLibrary.TP_Proyecto_De_Software.services.IDocumentoService;
 import com.UNLaLibrary.TP_Proyecto_De_Software.services.IMateriaService;
+import com.UNLaLibrary.TP_Proyecto_De_Software.services.IReviewService;
+import com.UNLaLibrary.TP_Proyecto_De_Software.services.IUserService;
 
 @Controller
 public class DocumentoController {
@@ -25,6 +29,10 @@ public class DocumentoController {
     private IDocumentoService documentoService;
     @Autowired
     private IMateriaService materiaService;
+    @Autowired
+    private IUserService userService;
+    @Autowired
+    private IReviewService reviewService;
 
     // Formulario basico de un documento
     @GetMapping("/agregarDocumento/materia")
@@ -43,19 +51,30 @@ public class DocumentoController {
         UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         MateriaModel materiaModel = materiaService.traerMateria(idMateria);
         
-        DocumentoModel documentoModel = new DocumentoModel(0L, titulo, descripcion, materiaModel, userDetails.getUsername(), "");
+        DocumentoModel documentoModel = new DocumentoModel(0L, titulo, descripcion, materiaModel, userDetails.getUsername(), null, "");
         documentoService.agregarDocumento(documentoModel, archivoPDF);
 
-        return "redirect:/misCursos/" + materiaModel.getNombre();
+        return "redirect:/misCursos/materia?id=" + materiaModel.getIdMateria();
     }
 
     @GetMapping("/eliminarDocumento")
     public String eliminarDocumento(@RequestParam("id") long idDocumento){
         DocumentoModel documentoModel = documentoService.traerDocumento(idDocumento);
-        String materia = documentoModel.getMateria().getNombre();
-
         documentoService.eliminarDocumento(idDocumento);
 
-        return "redirect:/misCursos/" + materia;
+        return "redirect:/misCursos/materia?id=" + documentoModel.getMateria().getIdMateria();
+    }
+
+    @PostMapping("/agregarReview/documento")
+    public String agregarReview(@RequestParam("id") long idDocumento, @RequestParam("valoracionReview") int valoracion,
+        @RequestParam("tituloReview") String titulo, @RequestParam("comentarioReview") String comentario){
+        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		UserModel autor = userService.traerUserPorUsername(userDetails.getUsername());
+        DocumentoModel documentoModel = documentoService.traerDocumento(idDocumento);
+
+        ReviewModel reviewModel = new ReviewModel(0L, valoracion, titulo, comentario, autor, documentoModel);
+        reviewService.agregarReview(reviewModel);
+
+        return "redirect:/listadoDocumentos/documento?id=" + idDocumento;
     }
 }

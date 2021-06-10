@@ -1,5 +1,7 @@
 package com.UNLaLibrary.TP_Proyecto_De_Software.entities;
 
+import java.util.Set;
+
 import javax.persistence.*;
 
 @Entity
@@ -15,18 +17,21 @@ public class Documento {
     @JoinColumn(name = "materia", referencedColumnName = "idMateria", nullable = false)
 	private Materia materia;
 	private String profesor;
+    @OneToMany(mappedBy = "documento")
+    private Set<Review> reviews;
     @Column(name = "hashArchivo")
 	private String hash;
 
     public Documento() {
     }
 
-    public Documento(long idDocumento, String titulo, String descripcion, Materia materia, String profesor, String hash) {
+    public Documento(long idDocumento, String titulo, String descripcion, Materia materia, String profesor, Set<Review> reviews, String hash) {
         this.idDocumento = idDocumento;
         this.titulo = titulo;
         this.descripcion = descripcion;
         this.materia = materia;
         this.profesor = profesor;
+        this.reviews = reviews;
         this.hash = hash;
     }
 
@@ -70,42 +75,20 @@ public class Documento {
         this.profesor = profesor;
     }
 
+    public Set<Review> getReviews() {
+        return this.reviews;
+    }
+
+    public void setReviews(Set<Review> reviews) {
+        this.reviews = reviews;
+    }
+
     public String getHash() {
         return this.hash;
     }
 
     public void setHash(String hash) {
         this.hash = hash;
-    }
-
-    public Documento idDocumento(long idDocumento) {
-        setIdDocumento(idDocumento);
-        return this;
-    }
-
-    public Documento titulo(String titulo) {
-        setTitulo(titulo);
-        return this;
-    }
-
-    public Documento descripcion(String descripcion) {
-        setDescripcion(descripcion);
-        return this;
-    }
-
-    public Documento materia(Materia materia) {
-        setMateria(materia);
-        return this;
-    }
-
-    public Documento profesor(String profesor) {
-        setProfesor(profesor);
-        return this;
-    }
-
-    public Documento hash(String hash) {
-        setHash(hash);
-        return this;
     }
 
     @Override
@@ -116,7 +99,8 @@ public class Documento {
             ", descripcion='" + getDescripcion() + "'" +
             ", materia='" + getMateria() + "'" +
             ", profesor='" + getProfesor() + "'" +
+            ", reviews='" + getReviews() + "'" +
             ", hash='" + getHash() + "'" +
             "}";
-    }    
+    }
 }

@@ -33,7 +33,7 @@
             <a sec:authorize="!hasRole('ROLE_PROFESOR')" th:href="@{/listadoDepartamentos}"><button type="button" class="btn btn-primary botonBuscar">BUSCAR DOCUMENTOS</button></a>
             <a sec:authorize="hasRole('ROLE_PROFESOR')" th:href="@{/misCursos}"><button type="button" class="btn btn-primary botonBuscar">GESTIONAR MATERIAS</button></a>
          </div>
-         <div class="espaciador">
+         <div sec:authorize="isAnonymous()" class="espaciador">
             <p class="">Haga clic para loguearse</p>
             <a th:href="@{/login}"><button type="button" class="btn btn-primary botonBuscar">BUSCAR DOCUMENTOS</button></a>
          </div>

@@ -14,14 +14,13 @@ public class DocumentoConverter {
 	//De entidad a modelo
 	public DocumentoModel entityToModel(Documento documento) {
 		return new DocumentoModel(documento.getIdDocumento(), documento.getTitulo(), documento.getDescripcion(), 
-            materiaConverter.entityToModel(documento.getMateria()), documento.getProfesor(), documento.getHash());
+            materiaConverter.entityToModel(documento.getMateria()), documento.getProfesor(), documento.getReviews(), documento.getHash());
 	}
 	
 	
 	//De modelo a entidad
 	public Documento modelToEntity(DocumentoModel documentoModel) {
 		return new Documento(documentoModel.getId(), documentoModel.getTitulo(), documentoModel.getDescripcion(), 
-        materiaConverter.modelToEntity(documentoModel.getMateria()), documentoModel.getProfesor(), documentoModel.getHash());
+        materiaConverter.modelToEntity(documentoModel.getMateria()), documentoModel.getProfesor(), documentoModel.getReviews(), documentoModel.getHash());
 	}
-	
 }

@@ -2,14 +2,14 @@
 <html lang="en">
    <head th:replace="fragments/head :: head(title='Documento | UNLa Library')"></head>
    
-   <body>
+   <body class="bg-light">
     <nav th:replace="fragments/navegacion"></nav>
 
     <div class="container espaciador">
       <h2 class="mb-4">Detalle de documento</h2>
 		  <div class="row gx-4 gx-lg-5">
         <div class="col-md-4 mb-5">
-          <div class="card h-100">                  
+          <div class="card">                  
             <div class="card-body">
               <h2 th:text="${documento.titulo}" class="card-title"></h2>
               <p class="card-text"> Universidad: <a th:text="${documento.materia.universidad}"></a> </p>
@@ -41,6 +41,114 @@
                 </div>
               </div>
               <a class="btn btn-primary btn-md" th:href="@{/listadoDocumentos/documento/descarga?id={id}(id=${documento.id})}" th:download="${documento.titulo}">Descargar</a>
+            </div>
+          </div>
+        </div>
+        <!-- Reviews -->
+        <div class="col-md-8 mb-5">
+          <div class="card">
+            <div class="card-body p-4">
+              <!-- Promedio general de reviews y distribucion -->
+              <div class="valoracion-total d-flex justify-content-center">
+                <div class="valoracion-promedio text-end pe-5">
+                  <h1 class="display-4" th:text="${#numbers.formatDecimal(promedio, 0, 1)}"></h1>
+                  <div class="pb-2">
+                    <i class="fa fa-lg text-primary pe-1" th:classappend="${reviewSize} > 0 ? fa-star: fa-star-o"></i>
+                    <i class="fa fa-lg text-primary pe-1" th:classappend="${promedio} >= 2 ? fa-star: (${promedio} > 1 ? fa-star-half-o : fa-star-o)"></i>
+                    <i class="fa fa-lg text-primary pe-1" th:classappend="${promedio} >= 3 ? fa-star: (${promedio} > 2 ? fa-star-half-o : fa-star-o)"></i>
+                    <i class="fa fa-lg text-primary pe-1" th:classappend="${promedio} >= 4 ? fa-star: (${promedio} > 3 ? fa-star-half-o : fa-star-o)"></i>
+                    <i class="fa fa-lg text-primary pe-1" th:classappend="${promedio} >= 5 ? fa-star: (${promedio} > 4 ? fa-star-half-o : fa-star-o)"></i>
+                  </div>
+                  <p class="text-black-50" th:text="'Promedio entre ' + ${reviewSize} + ' opiniones'"></p>
+                </div>
+                <div class="valoracion-estrellas w-50 text-black-50">
+                  <div class="d-flex pb-1">
+                    <p class="m-0 pe-3">5 estrellas</p>
+                    <div class="progress align-self-center" style="height: 5px; width: 120px;">
+                      <div th:if="${reviewSize} > 0" class="progress-bar" role="progressbar" th:style="'width:'+ (${estrellas[4]} * 100) / ${reviewSize} +'%;'" th:attr="aria-valuenow=(${estrellas[4]} * 100) / ${reviewSize}" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                    <p class="m-0 ps-3" th:text="${estrellas[4]}"></p>
+                  </div>
+                  <div class="d-flex pb-1">
+                    <p class="m-0 pe-3">4 estrellas</p>
+                    <div class="progress align-self-center" style="height: 5px; width: 120px;">
+                      <div th:if="${reviewSize} > 0" class="progress-bar" role="progressbar" th:style="'width:'+ (${estrellas[3]} * 100) / ${reviewSize} +'%;'" th:attr="aria-valuenow=(${estrellas[3]} * 100) / ${reviewSize}" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                    <p class="m-0 ps-3" th:text="${estrellas[3]}"></p>
+                  </div>
+                  <div class="d-flex pb-1">
+                    <p class="m-0 pe-3">3 estrellas</p>
+                    <div class="progress align-self-center" style="height: 5px; width: 120px;">
+                      <div th:if="${reviewSize} > 0" class="progress-bar" role="progressbar" th:style="'width:'+ (${estrellas[2]} * 100) / ${reviewSize} +'%;'" th:attr="aria-valuenow=(${estrellas[2]} * 100) / ${reviewSize}" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                    <p class="m-0 ps-3" th:text="${estrellas[2]}"></p>
+                  </div>
+                  <div class="d-flex pb-1">
+                    <p class="m-0 pe-3">2 estrellas</p>
+                    <div class="progress align-self-center" style="height: 5px; width: 120px;">
+                      <div th:if="${reviewSize} > 0" class="progress-bar" role="progressbar" th:style="'width:'+ (${estrellas[1]} * 100) / ${reviewSize} +'%;'" th:attr="aria-valuenow=(${estrellas[1]} * 100) / ${reviewSize}" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                    <p class="m-0 ps-3" th:text="${estrellas[1]}"></p>
+                  </div>
+                  <div class="d-flex">
+                    <p class="m-0 pe-3">1 estrellas</p>
+                    <div class="progress align-self-center" style="height: 5px; width: 120px;">
+                      <div th:if="${reviewSize} > 0" class="progress-bar" role="progressbar" th:style="'width:'+ (${estrellas[0]} * 100) / ${reviewSize} +'%;'" th:attr="aria-valuenow=(${estrellas[0]} * 100) / ${reviewSize}" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                    <p class="m-0 ps-3" th:text="${estrellas[0]}"></p>
+                  </div>
+                  
+                </div>
+              </div>
+              <hr th:if="${reviewSize} > 0"/>
+              <!-- Listado de todas las reviews -->
+              <div th:each="review:${documento.reviews}" class="review pb-4">
+                <div class="valoracion pb-2">
+                  <i class="fa fa-star text-primary pe-1"></i>
+                  <i class="fa text-primary pe-1" th:classappend="${review.valoracion} >= 2 ? fa-star: (${review.valoracion} > 1 ? fa-star-half-o : fa-star-o)"></i>
+                  <i class="fa text-primary pe-1" th:classappend="${review.valoracion} >= 3 ? fa-star: (${review.valoracion} > 2 ? fa-star-half-o : fa-star-o)"></i>
+                  <i class="fa text-primary pe-1" th:classappend="${review.valoracion} >= 4 ? fa-star: (${review.valoracion} > 3 ? fa-star-half-o : fa-star-o)"></i>
+                  <i class="fa text-primary pe-1" th:classappend="${review.valoracion} >= 5 ? fa-star: (${review.valoracion} > 4 ? fa-star-half-o : fa-star-o)"></i>
+                </div>
+                <h5 class="h5 text-bold" th:text="${review.titulo}"></h5>
+                <p th:text="${review.comentario}">
+                  Estoy gratamente sorprendido por todas las prestaciones del equipo. 
+                  El tener android cómo so, convierte la tele en un centro multimedia real. 
+                  La calidad de imagen es muy buena. El sonido es potente, aunque me gustaría 
+                  que sea un poco más definido (algo totalmente lógico en un smart de este precio y tamaño). Tiene
+                </p>
+                <div class="valor-opinion">
+                  <i class="fa fa-thumbs-o-up pe-2 text-success"></i>0
+                  <i class="fa fa-thumbs-o-down ps-4 pe-2 text-danger"></i>0
+                </div>
+              </div>
+              <hr th:if="${mostrarFormulario}"/>
+
+              <!-- Formulario para agregar una review -->
+              <form th:if="${mostrarFormulario}" method="POST" th:action="@{/agregarReview/documento?id=} + ${documento.id}">
+                <div class="mb-3">
+                  <div class="valoracionForm">
+                    <label for="valoracionReview" class="form-label">¿Cuantas estrellas le darias?</label>
+                    <input type="text" class="invisible" id="valoracionReview" name="valoracionReview" required>
+                    <div>
+                      <i id="una-estrellas" class="valoracion-estrella fa fa-star-o fa-lg text-primary pe-1"></i>
+                      <i id="dos-estrellas" class="valoracion-estrella fa fa-star-o fa-lg text-primary pe-1"></i>
+                      <i id="tres-estrellas" class="valoracion-estrella fa fa-star-o fa-lg text-primary pe-1"></i>
+                      <i id="cuatro-estrellas" class="valoracion-estrella fa fa-star-o fa-lg text-primary pe-1"></i>
+                      <i id="cinco-estrellas" class="valoracion-estrella fa fa-star-o fa-lg text-primary pe-1"></i>
+                    </div>
+                  </div>
+                </div>
+                <div class="mb-3">
+                  <label for="tituloReview" class="form-label">Resume tu opinion en una frase</label>
+                  <input type="text" class="form-control" id="tituloReview" name="tituloReview" placeholder="Ponle un titulo a tu opinion" required>
+                </div>
+                <div class="mb-3">
+                  <label for="comentarioReview" class="form-label">Contanos mas del documento</label>
+                  <textarea class="form-control" id="comentarioReview" name="comentarioReview" rows="5" placeholder="Describe sus caracteristicas" required></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Enviar review</button>
+              </form>
             </div>
           </div>
         </div>

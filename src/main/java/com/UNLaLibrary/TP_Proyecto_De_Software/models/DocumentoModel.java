@@ -5,6 +5,9 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.math.BigInteger;
 import java.util.Date;
+import java.util.Set;
+
+import com.UNLaLibrary.TP_Proyecto_De_Software.entities.Review;
 
 public class DocumentoModel {
 
@@ -14,58 +17,73 @@ public class DocumentoModel {
 	private String descripcion;
 	private MateriaModel materia;
 	private String profesor;
+	private Set<Review> reviews;
 	private String hash;
 	
-	//Constructores
-	public DocumentoModel() {}
 
-	public DocumentoModel(long id, String titulo, String descripcion, MateriaModel materia, String profesor, String hash) {
+	public DocumentoModel() {
+	}
+
+	public DocumentoModel(long id, String titulo, String descripcion, MateriaModel materia, String profesor, Set<Review> reviews, String hash) {
 		this.id = id;
 		this.titulo = titulo;
 		this.descripcion = descripcion;
 		this.materia = materia;
 		this.profesor = profesor;
+		this.reviews = reviews;
 		this.hash = hash;
 	}
-	
-	//Getters y Setters
+
 	public long getId() {
-		return id;
+		return this.id;
 	}
+
 	public void setId(long id) {
 		this.id = id;
 	}
-	
+
 	public String getTitulo() {
 		return this.titulo;
 	}
+
 	public void setTitulo(String titulo) {
 		this.titulo = titulo;
 	}
 
 	public String getDescripcion() {
-		return descripcion;
+		return this.descripcion;
 	}
+
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
 	}
-	
+
 	public MateriaModel getMateria() {
-		return materia;
+		return this.materia;
 	}
+
 	public void setMateria(MateriaModel materia) {
 		this.materia = materia;
 	}
 
 	public String getProfesor() {
-		return profesor;
+		return this.profesor;
 	}
+
 	public void setProfesor(String profesor) {
 		this.profesor = profesor;
 	}
 
+	public Set<Review> getReviews() {
+		return this.reviews;
+	}
+
+	public void setReviews(Set<Review> reviews) {
+		this.reviews = reviews;
+	}
+
 	public String getHash() {
-		return hash;
+		return this.hash;
 	}
 
 	// Genera un codigo unico para nombrar cada documento, asi no se pueden pisar cuando los guardamos
@@ -77,7 +95,7 @@ public class DocumentoModel {
 		messageDigest.update(transformedName.getBytes(StandardCharsets.UTF_8));
 		this.hash = new BigInteger(1, messageDigest.digest()).toString(16);
 	}
-	
+
 	@Override
 	public String toString() {
 		return "{" +
@@ -86,6 +104,7 @@ public class DocumentoModel {
 			", descripcion='" + getDescripcion() + "'" +
 			", materia='" + getMateria() + "'" +
 			", profesor='" + getProfesor() + "'" +
+			", reviews='" + getReviews() + "'" +
 			", hash='" + getHash() + "'" +
 			"}";
 	}

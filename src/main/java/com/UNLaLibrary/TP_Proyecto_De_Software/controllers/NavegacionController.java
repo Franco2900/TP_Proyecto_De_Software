@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller; //Para indicar que esta clase es un Controller
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView; //Para poder usar mezclar las vistas html con los modelos
 
 import com.UNLaLibrary.TP_Proyecto_De_Software.models.DocumentoModel;
@@ -16,7 +15,6 @@ import java.util.List;
 
 @Controller
 public class NavegacionController {
-	
 	@Autowired
 	private IDocumentoService documentoService;
 	@Autowired
@@ -57,16 +55,4 @@ public class NavegacionController {
 		model.addObject("materia", materia);
 		return model;
 	}
-	
-	
-	@GetMapping("/listadoDepartamentos/{departamento}/{carrera}/{materia}/documento") //Para ver el documento seleccionado después de haber pasado por todos los filtros
-	public ModelAndView mostrarDocumentoIndividual(@PathVariable ("departamento") String departamento, @PathVariable ("carrera") String carrera, @PathVariable ("materia") String materia, @RequestParam("id") long id) {
-		ModelAndView model = new ModelAndView("documento");
-		DocumentoModel documento = documentoService.traerDocumento(id);
-		
-		model.addObject("documento", documento);
-		return model;
-	}
-	
-	
 }
