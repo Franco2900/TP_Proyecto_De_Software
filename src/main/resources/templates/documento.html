@@ -8,8 +8,8 @@
       <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a th:href="@{/listadoDepartamentos/} + ${documento.materia.departamento}" th:text="${documento.materia.departamento}" class="text-decoration-none"></a></li>
-          <li class="breadcrumb-item"><a th:href="@{/listadoCarreras/} + ${documento.materia.carrera}" th:text="${documento.materia.carrera}" class="text-decoration-none"></a></li>
-          <li class="breadcrumb-item"><a th:href="@{/listadoMaterias/} + ${documento.materia.nombre}" th:text="${documento.materia.nombre}" class="text-decoration-none"></a></li>
+          <li class="breadcrumb-item"><a th:href="@{/listadoDepartamentos/} + ${documento.materia.departamento} + @{/} + ${documento.materia.carrera}" th:text="${documento.materia.carrera}" class="text-decoration-none"></a></li>
+          <li class="breadcrumb-item"><a th:href="@{/listadoDepartamentos/} + ${documento.materia.departamento} + @{/} + ${documento.materia.carrera} + @{/} + ${documento.materia.nombre}" th:text="${documento.materia.nombre}" class="text-decoration-none"></a></li>
           <li class="breadcrumb-item active" aria-current="page" th:text="${documento.titulo}"></li>
         </ol>
       </nav>

@@ -5,6 +5,12 @@
    <body>
     <nav th:replace="fragments/navegacion"></nav>
     <div class="container espaciador">
+      <nav th:if="${departamento != null}" aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item active" aria-current="page" th:text="${departamento}"></li>
+        </ol>
+      </nav>
+
       <h2 th:if="${departamento != null}" class="mb-5"><a th:text="${departamento}"> </a> </h2>
       <h2 th:if="${departamento == null}" class="mb-5">Listado de todas las carreras </h2>
 

@@ -5,6 +5,14 @@
    <body>
     <nav th:replace="fragments/navegacion"></nav>
     <div class="container espaciador">
+      <nav th:if="${departamento != null}" aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a th:href="@{/listadoDepartamentos/} + ${departamento}" th:text="${departamento}" class="text-decoration-none"></a></li>
+          <li class="breadcrumb-item"><a th:href="@{/listadoDepartamentos/} + ${departamento} + @{/} + ${carrera}" th:text="${carrera}" class="text-decoration-none"></a></li>
+          <li class="breadcrumb-item active" aria-current="page" th:text="${materia}"></li>
+        </ol>
+      </nav>
+
       <h2 th:if="${carrera != null && materia == null}" class="mb-4"><a th:text="${carrera}"> </a></h2>
       <h2 th:if="${materia != null}" class="mb-4"><a th:text="${materia}"> </a></h2>
       <h2 th:if="${carrera == null && materia == null}" class="mb-4">Listado de todos los documentos</h2>
