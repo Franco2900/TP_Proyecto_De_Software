@@ -29,8 +29,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
                 .antMatchers("/css/**", "/js/**", "/img/**").permitAll()
                 .antMatchers("/", "/registro", "/registrosuccess").permitAll()
                 .antMatchers("/listadoDocumentos/**", "/listadoDepartamentos/**", 
-                    "/listadoMaterias/**", "/listadoCarreras/**").hasRole("ALUMNO")
-                .antMatchers("/agregarDocumento/**", "/misCursos/**").hasRole("PROFESOR")
+                    "/listadoMaterias/**", "/listadoCarreras/**").hasAnyRole("ALUMNO", "PROFESOR", "ADMIN")
+                .antMatchers("/agregarDocumento/**", "/eliminarDocumento/**", "/misCursos/**").hasRole("PROFESOR")
                 .anyRequest().authenticated()
             .and()
                 .formLogin().loginPage("/login").loginProcessingUrl("/loginprocess")
