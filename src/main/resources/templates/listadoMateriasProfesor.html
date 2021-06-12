@@ -6,11 +6,11 @@
     <nav th:replace="fragments/navegacion"></nav>
 
     <div class="container espaciador">
-      <h2 class="mb-4">Listado de documentos de la materia <a th:text="${materia.nombre}"> </a> </h2>
+      <h2 class="mb-4"><a th:text="${materia.nombre}"> </a> </h2>
       
       <div class="row">
         <div th:each="documento:${listaDocumentos}" class="col-lg-4 col-md-6 col-sm-12 mb-5">
-          <div class="card h-100">                  
+          <div class="card h-100 shadow">                  
             <div class="card-body">
               <h2 th:text="${documento.titulo}" class="card-title">Título</h2>
               <h5 th:text="${documento.materia.departamento}" class="card-text">Departamento</h5>
@@ -55,8 +55,8 @@
         </div>
       
         <div class="col-lg-4 col-md-6 col-sm-12 p-0 mb-5">
-          <a class="h-100 w-100 add-documento-container d-flex justify-content-center border-primary border-5" th:href="@{/agregarDocumento/materia?id=} + ${materia.idMateria}">
-            <img th:src="@{/img/iconos/add.svg}" class="add-documento align-self-center">
+          <a class="w-100 h-100" th:href="@{/agregarDocumento/materia?id=} + ${materia.idMateria}">
+            <i class="fa fa-plus-square w-100 text-primary add-documento border-primary border-5 text-center align-self-center"></i>
           </a>
         </div>
         

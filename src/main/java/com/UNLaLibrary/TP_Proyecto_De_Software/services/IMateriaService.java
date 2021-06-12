@@ -11,4 +11,5 @@ public interface IMateriaService {
     public List<String> traerCarrerasPorDepartamento(String departamento);
     public List<MateriaModel> traerMateriasPorCarreraYDepartamento(String carrera, String departamento);
     public List<MateriaModel> traerMateriasPorUser(String username);
+    public int contarMateriasPorCarrera(String carrera);
 }

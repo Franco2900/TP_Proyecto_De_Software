@@ -37,17 +37,19 @@
     margin: auto;
 }
 
-.add-documento-container{
+.add-documento{
+    font-size: 5.5em;
     border-style: dotted;
     border-radius: 20px;
+    height: 3.2em;
+    line-height: 3.2em;
+    transition: 0.3s;
 }
 
-.add-documento-container:hover{
+.add-documento:hover{
+    color: #FFF!important;
     border-style: solid;
-}
-
-.add-documento{
-    height: 70px;
+    background-color: #0d6efd;
 }
 
 .valoracion-estrella{

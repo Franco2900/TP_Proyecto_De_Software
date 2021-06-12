@@ -26,7 +26,7 @@ public class ListadoMateriasController {
 
 	@GetMapping("/listadoMaterias") 
 	public ModelAndView navegarMaterias() { //Para ver todas las materias de todas los departamentos
-		ModelAndView model = new ModelAndView("listadoMateriasUniversal");	
+		ModelAndView model = new ModelAndView("listadoMaterias");	
 		List<MateriaModel> listaMaterias = materiaService.traerMaterias();
 		
 		model.addObject("listaMaterias", listaMaterias);
@@ -46,7 +46,7 @@ public class ListadoMateriasController {
 	
 	@GetMapping("listadoMaterias/{materia}") //Para ver todos los documentos de una materia
 	public ModelAndView materiaIndividual(@PathVariable ("materia") String materia) {
-		ModelAndView model = new ModelAndView("listadoMateriasUniversalXDocumentos");
+		ModelAndView model = new ModelAndView("listadoDocumentos");
 		List<DocumentoModel> listaDocumentosDeLaMateria = documentoService.traerDocumentosPorMateria(materia);
 		
 		model.addObject("listaDocumentos", listaDocumentosDeLaMateria);

@@ -10,7 +10,7 @@
 
       <div class="row">
         <div th:each="materia:${listaMaterias}" class="col-lg-4 col-md-6 col-sm-12 mb-5">
-          <div class="card h-100">
+          <div class="card h-100 shadow">
             <div class="card-body">
               <h2 class="card-text">Materia: <a th:text="${materia.nombre}"></a> </h2>
               <h5 class="card-text">Carrera: <a th:text="${materia.carrera}"></a> </h5>

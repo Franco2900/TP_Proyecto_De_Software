@@ -1,5 +1,7 @@
 package com.UNLaLibrary.TP_Proyecto_De_Software.controllers;
 
+import java.util.ArrayList;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller; //Para indicar que esta clase es un Controller
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,8 +28,15 @@ public class NavegacionController {
 	public ModelAndView mostrarCarreras(@PathVariable("departamento") String departamento) {
 		ModelAndView model = new ModelAndView("listadoCarreras");
 		List<String> listaCarreras = materiaService.traerCarrerasPorDepartamento(departamento);
-		
+		List<Integer> materiasPorCarrera = new ArrayList<Integer>();
+
+		for(String carrera:listaCarreras){
+			int cantidadMaterias = materiaService.contarMateriasPorCarrera(carrera);
+			materiasPorCarrera.add(cantidadMaterias);
+		}
+
 		model.addObject("listaCarreras", listaCarreras);
+		model.addObject("materiasPorCarrera", materiasPorCarrera);
 		model.addObject("departamento", departamento);
 		return model;
 	}

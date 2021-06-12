@@ -4,30 +4,22 @@
    
    <body>
     <nav th:replace="fragments/navegacion"></nav>
-
     <div class="container espaciador">
-      <h2 class="mb-4">Listado de Materias de la carrera <a th:text="${carrera}"> </a> del departamento <a th:text="${departamento}"> </a> </h2>
 
-       <div th:each="materia:${listaMaterias}" class="row col gx-4 gx-lg-5">
-        <div class="col-md-4 mb-5">
-          <div class="card h-100">                  
-            <div class="card-body">
-              <h2 th:text="${materia.nombre}" class="card-title">Materia</h2>
-            </div>
-            <div class="card-footer">
-            <a class="btn btn-outline-primary btn-sm" th:href="@{/listadoDepartamentos/} + ${departamento} + @{/} + ${carrera} + @{/} + ${materia.nombre}" >Ver documento</a> 
-            </div>
-          </div>
-        </div>
-      </div>
+      <h2 th:if="${carrera != null}" class="mb-5"><a th:text="${carrera}"> </a> </h2>
+      <h2 th:if="${carrera == null}" class="mb-5">Listado de todas las materias </h2>
 
-	<div>
-	Ir al listado de: <p>
-	<a th:href="@{/listadoDepartamentos}"> Departamentos </a> <p>
-	<a th:href="@{/listadoCarreras}"> Carreras </a> <p>
-	<a th:href="@{/listadoMaterias}"> Materias </a> <p>
-	<a th:href="@{/listadoDocumentos}"> Todos los documentos </a> <p>
-	</div>
+      <ul class="list-group list-group-flush col-lg-6 col-md-12">
+        <a th:if="${carrera != null}" th:each="materia:${listaMaterias}" class="list-group-item list-group-item-action fs-5 d-flex" th:href="@{/listadoDepartamentos/} + ${departamento} + @{/} + ${carrera} + @{/} + ${materia.nombre}">
+          <div class="text-truncate" th:text="${materia.nombre}"></div>
+          <span class="badge bg-primary rounded-pill ms-auto" th:text="${#lists.size(materia.documentos)}"></span>
+        </a>
+        <a th:if="${carrera == null}" th:each="materia:${listaMaterias}" class="list-group-item list-group-item-action fs-5 d-flex" th:href="@{/listadoMaterias} + @{/} + ${materia.nombre}">
+          <div class="text-truncate" th:text="${materia.nombre}"></div>
+          <span class="badge bg-primary rounded-pill ms-auto" th:text="${#lists.size(materia.documentos)}"></span>
+        </a>
+      </ul>
+    </div>
 
     <footer th:replace="fragments/footer :: footer"> </footer>
     <footer th:replace="fragments/scripts :: scripts"> </footer>

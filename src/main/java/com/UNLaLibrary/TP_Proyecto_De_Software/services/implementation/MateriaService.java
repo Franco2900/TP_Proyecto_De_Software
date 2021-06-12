@@ -70,4 +70,9 @@ public class MateriaService implements IMateriaService{
         }
         return materias;
     }
+
+    public int contarMateriasPorCarrera(String carrera){
+        int materias = materiaRepository.countMateriasByCarrera(carrera);
+        return materias;
+    }
 }

@@ -31,7 +31,7 @@ public class ListadoDocumentosController {
 	
 	@RequestMapping("/listadoDocumentos") //Para ver todos los documentos disponibles
 	public ModelAndView navegar() {
-		ModelAndView model = new ModelAndView("listadoDocumentosUniversal");
+		ModelAndView model = new ModelAndView("listadoDocumentos");
 		model.addObject("listaDocumentos", documentoService.traerDocumentos() );
 		return model;
 	}

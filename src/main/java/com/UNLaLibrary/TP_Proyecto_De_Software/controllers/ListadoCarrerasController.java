@@ -1,6 +1,7 @@
 package com.UNLaLibrary.TP_Proyecto_De_Software.controllers;
 
 import java.util.List;
+import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,17 +23,24 @@ public class ListadoCarrerasController {
 
 	@GetMapping("/listadoCarreras") 
 	public ModelAndView navegarCarreras() { //Para ver todas las carreras de todos los departamentos
-		ModelAndView model = new ModelAndView("listadoCarrerasUniversal");	
+		ModelAndView model = new ModelAndView("listadoCarreras");	
 		List<String> listaCarreras = materiaService.traerCarreras();
+		List<Integer> materiasPorCarrera = new ArrayList<Integer>();
+
+		for(String carrera:listaCarreras){
+			int cantidadMaterias = materiaService.contarMateriasPorCarrera(carrera);
+			materiasPorCarrera.add(cantidadMaterias);
+		}
 		
 		model.addObject("listaCarreras", listaCarreras);
+		model.addObject("materiasPorCarrera", materiasPorCarrera);
 		return model;
 	}
 	
 	
 	@GetMapping("listadoCarreras/{carrera}") //Para ver todos los documentos de una carrera
 	public ModelAndView carreraIndividual(@PathVariable("carrera") String carrera) {
-		ModelAndView model = new ModelAndView("listadoCarrerasUniversalXDocumentos");
+		ModelAndView model = new ModelAndView("listadoDocumentos");
 		List<DocumentoModel> listaDocumentosDeLaCarrera = documentoService.traerDocumentosPorCarrera(carrera);
 		
 		model.addObject("listaDocumentos", listaDocumentosDeLaCarrera);

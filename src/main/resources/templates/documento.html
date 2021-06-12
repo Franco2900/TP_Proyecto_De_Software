@@ -4,8 +4,16 @@
    
    <body class="bg-light">
     <nav th:replace="fragments/navegacion"></nav>
-
     <div class="container espaciador">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a th:href="@{/listadoDepartamentos/} + ${documento.materia.departamento}" th:text="${documento.materia.departamento}" class="text-decoration-none"></a></li>
+          <li class="breadcrumb-item"><a th:href="@{/listadoCarreras/} + ${documento.materia.carrera}" th:text="${documento.materia.carrera}" class="text-decoration-none"></a></li>
+          <li class="breadcrumb-item"><a th:href="@{/listadoMaterias/} + ${documento.materia.nombre}" th:text="${documento.materia.nombre}" class="text-decoration-none"></a></li>
+          <li class="breadcrumb-item active" aria-current="page" th:text="${documento.titulo}"></li>
+        </ol>
+      </nav>
+
       <h2 class="mb-4">Detalle de documento</h2>
 		  <div class="row gx-4 gx-lg-5">
         <div class="col-md-4 col-sm-12 mb-5">
@@ -51,7 +59,7 @@
               <!-- Promedio general de reviews y distribucion -->
               <div class="valoracion-total row">
                 <div class="valoracion-promedio col-md-6 col-sm-12 text-end pe-5">
-                  <h1 class="display-4" th:text="${#numbers.formatDecimal(promedio, 0, 1)}"></h1>
+                  <h1 class="display-4" th:text="${#numbers.formatDecimal(promedio, 1, 1)}"></h1>
                   <div class="pb-2">
                     <i class="fa fa-lg text-primary pe-1" th:classappend="${reviewSize} > 0 ? fa-star: fa-star-o"></i>
                     <i class="fa fa-lg text-primary pe-1" th:classappend="${promedio} >= 2 ? fa-star: (${promedio} > 1 ? fa-star-half-o : fa-star-o)"></i>

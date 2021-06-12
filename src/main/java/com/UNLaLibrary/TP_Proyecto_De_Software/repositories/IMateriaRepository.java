@@ -26,6 +26,9 @@ public interface IMateriaRepository extends JpaRepository<Materia, Long> {
     @Query("SELECT m FROM Materia m INNER JOIN m.users u WHERE u.username = (:username)")
     public abstract List<Materia> findMateriasByUser(@Param("username") String username);
 
+    @Query("SELECT COUNT(m) FROM Materia m WHERE m.carrera = (:carrera)")
+    public abstract int countMateriasByCarrera(@Param("carrera") String carrera);
+
     @Query("FROM Materia WHERE id=(:id) ")
     public abstract Materia findMateria(@Param("id") long id);
 }
