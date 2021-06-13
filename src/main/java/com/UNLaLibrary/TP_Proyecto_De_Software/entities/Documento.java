@@ -4,6 +4,9 @@ import java.util.Set;
 
 import javax.persistence.*;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 @Entity
 @Table (name = "Documento")
 public class Documento {
@@ -18,6 +21,7 @@ public class Documento {
 	private Materia materia;
 	private String profesor;
     @OneToMany(mappedBy = "documento")
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private Set<Review> reviews;
     @Column(name = "hashArchivo")
 	private String hash;

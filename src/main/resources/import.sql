@@ -33,6 +33,8 @@ insert into user(email, enabled, password, username, userRole) values('profesor@
 insert into user(email, enabled, password, username, userRole) values('alumno@gmail.com', true, '$2y$12$MfKtZvc8vHkxwppiFthL6ewrh4gryY0L.K1HZtVyBasqUVJPs/TWK', 'alumno', 3);
 insert into user(email, enabled, password, username, userRole) values('alumno2@gmail.com', true, '$2y$12$zInV8S0oKKsp1aOoGQkuKOQDaNklXAMWt45dh7R01rl.Sb0KLDqNS', 'alumno2', 3);
 insert into user(email, enabled, password, username, userRole) values('alumno3@gmail.com', true, '$2y$12$YFc8.i8m0.4d5myYc4Qr6.n9.418zcHSr/treaB.EqmzwUC8jNjTq ', 'alumno3', 3);
+insert into user(email, enabled, password, username, userRole) values('alumno4@gmail.com', true, '$2y$12$YFc8.i8m0.4d5myYc4Qr6.n9.418zcHSr/treaB.EqmzwUC8jNjTq ', 'alumno4', 3);
+
 insert into materiaPorUser(id, idMateria) values(2, 1);
 insert into materiaPorUser(id, idMateria) values(2, 3);
 insert into documento(titulo, descripcion, profesor, materia, hashArchivo) values("La primera computadora", "Buen libro", "Jose", 1, "f976a72a75241b8adcfd971daeca69d8");

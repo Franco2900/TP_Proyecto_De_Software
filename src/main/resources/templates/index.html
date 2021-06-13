@@ -30,7 +30,8 @@
          <h5 class="">En este portal podrás descargar todos la bibliografía necesaria para poder estudiar sin salir de tu casa.</h5>
          <div class="espaciador">
             <p class="">Haga clic en el botón para poder buscar los documentos.</p>
-            <a sec:authorize="!hasRole('ROLE_PROFESOR')" th:href="@{/listadoDepartamentos}"><button type="button" class="btn btn-primary botonBuscar">BUSCAR DOCUMENTOS</button></a>
+            <a sec:authorize="isAnonymous()" th:href="@{/login}"><button type="button" class="btn btn-primary botonBuscar">BUSCAR DOCUMENTOS</button></a>
+            <a sec:authorize="hasAnyRole('ROLE_ALUMNO', 'ROLE_ADMIN')" th:href="@{/listadoDepartamentos}"><button type="button" class="btn btn-primary botonBuscar">BUSCAR DOCUMENTOS</button></a>
             <a sec:authorize="hasRole('ROLE_PROFESOR')" th:href="@{/misCursos}"><button type="button" class="btn btn-primary botonBuscar">GESTIONAR MATERIAS</button></a>
          </div>
       </div>
